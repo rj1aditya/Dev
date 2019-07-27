@@ -1,0 +1,3 @@
+alias *="ls -lrt"
+alias src="cd /home/aditya/Dev/App/Src"
+alias scr="cd /home/aditya/Dev/App/Scr"

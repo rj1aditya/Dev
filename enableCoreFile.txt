@@ -1,0 +1,13 @@
+Enable core dumps
+The primary reason to allow core dumps is for troubleshooting purposes. The dumped memory of the process can be used for debugging issues, usually by more experienced developers. A software vendor may ask to enable core dumps. Usually to discover why a process crashed in the first place and find the related routine that caused it.
+
+Enabling core dumps on Linux is similar to disabling them, except that a few specific details should be configured. For example, if you only need details from a particular program, you can use soft limits. This is done by using -Swhich indicates that it is a soft limit. The -c denotes the size of a core dump.
+
+ulimit -S -c 0
+
+Next step is to only allow ‘my-program-to-troubleshoot’ to create a core dump.
+
+ulimit -S -c unlimited my-program-to-troubleshoot
+
+If you want to allow all processes to use core dumps, use the line above without the program, or set a system limit in /etc/security/limits.conf
+

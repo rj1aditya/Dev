@@ -1,0 +1,13 @@
+1. deletion of node.
+2. delete node at specific location.
+3. find length of link list recursively.
+4. Search element recursively.
+5. Search nth element from end recursively.
+6. Middle element.
+7. Occurance of given element.
+8. Loop detection.
+9. Loop Length.
+10. Palindrome. 
+11. Reverse LinkList.
+12. Remove Redundancy from sorted and unsorted link list.
+13. Swapping nodes.

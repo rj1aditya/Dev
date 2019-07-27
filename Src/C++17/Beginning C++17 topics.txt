@@ -1,0 +1,51 @@
+Most of the topics we are going to cover from this book are.
+
+containers
+smart pointers
+RAII
+exceptions
+move semantics
+algorithms
+
+A modern, safe C++ programming style replaces traditional low-level language constructs 
+1. with the use of containers (Chapters 5 and 19), 
+2. smart pointers(Chapter 6), 
+3. or other RAII techniques (Chapter 15), 
+4. and it emphasizes exceptions to report errors (Chapter 15),
+5. passing objects by value through move semantics (Chapter 17), 
+6. writing algorithms instead of loops (Chapter 19), and so on. Of course.
+
+
+Move Sementics:
+1. you gained insight into the mechanics behind the copying of objects, that is, copy constructors and assignment operators
+2. you know to prefer pass-by-reference over pass-by-value to avoid undue copying of parameters
+3. C++ offered facilities to copy objects, and if you wanted to avoid costly copies, then you simply used either references or pointers.
+4. Starting with C++11, however, there is a powerful new alternative. You can no longer only copy objects; you can now also move them.
+
+So Why move semantics?
+To avoid costly copying of obj, move semantics provide us a facilitie to move the obj.
+we’ll show you how move semantics allows you to efficiently transfer resources from one object into another, without deep copying.
+
+* What the difference is between lvalues and rvalues
+• That there’s another kind of references: rvalue references
+• What it means to move an object
+• How to provide so-called move semantics for objects of your own types
+• When objects are moved implicitly and how to explicitly move them
+• How move semantics leads to code that is both elegant and efficient
+
+
+Most function call expressions are rvalues. Only function calls that return a reference are lvalues.
+double r = std::abs(a * c); //return value from function here is rvalue.
+
+Prime examples are the subscript operators (operator[]()) and at() functions of your typical container. If v is a vector<int>, for example, both v[1] = -5; and v.at(2) = 132; would
+make for perfectly valid statements. 
+v[1] and v.at(2) are therefore clearly lvalues.
+
+Lvalues and Rvalues
+int count {5};
+int&& rtemp {count + 3}; // rvalue reference
+std::cout << rtemp << std::endl; // Output value of expression
+int& rcount {count}; // lvalue reference
+
+
+
