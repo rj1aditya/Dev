@@ -1,2 +1,38 @@
 Deque is a double ended queue. Where expansion and contractoin could be done from both side.
 Insertion and deletion is easy in Deques unlike vector or array.
+Function for deque and vector are some except push and pop function are for both front and back.
+Note:  A queue data structure allows insertion only at the end and deletion from the front.
+
+push_back, push_front, pop_back, pop_front, 
+front, back, 
+size, max_size it return the max no of element a deque container can hold.
+Note: all above function is a member function of deque class.
+insert: is a built in member function.
+        insert( position, value, .. );
+  In 3 way we can use insert function
+  
+  e.g. deque<int> q{1,20,30,40};
+       deque<int>::iterator it = q.begin();
+       it++;
+  1.    q.insert( it, 100 );
+        o/p: 1 100 10 20 30 40
+  2.    q.insert( it, 2, 0 );
+        o/p: 1 0 0 100 10 20 30 40
+  3.    vector<int> v{2,99}
+        q.insert( it, v.begin(), v.end() );
+        o/p: 1 99 99 0 0 100 10 20 30 40
+  
+  Note: insert return the pointer to the newly inserted element.
+
+
+
+
+Note: Auto keyword use to declare a variable automatically
+      e.g auto ptr = &i;
+      decltype use to detect the type of the data type.
+       e.g  int func1(){ return 10; }
+            int func2(){ return 'a';}
+       
+            decltype( func1() ) x;
+            decltype( func2() ) y;
+    
