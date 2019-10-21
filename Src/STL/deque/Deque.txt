@@ -1,0 +1,2 @@
+Deque is a double ended queue. Where expansion and contractoin could be done from both side.
+Insertion and deletion is easy in Deques unlike vector or array.
