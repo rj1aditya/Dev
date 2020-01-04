@@ -1,0 +1,59 @@
+Boost lib propvide:
+lexical_cast
+bad_lexical_cast
+for converting a intiger, floot, char, or any other data type into string data type.
+
+Why we shouuld use this:
+basically to convert a int,float,double data type into a string data type we have to follow long procedure with different func:
+e.g  int int_val =120;
+     stringstream strm;
+     strm << int_val;
+     
+     string s = strm.str();
+     
+Or to convert a string into other data type format we have to use different different function.
+e.g. 
+/* Convert from string
+
+atof() convert string to double
+atoi()                to int
+atol()                to long integer
+atoll()               to long long integer
+strtod()              to double
+strtof()
+strtol()
+...
+..
+*/
+
+this is so tedious task, to overcome from this we use boost lib.
+--------------------------------------------------------------------------------------------------------------------------------------
+How to use this:
+e.g
+
+#include"boost\lexical_cast.hpp"
+
+using namespace std;
+using boost::lexical_cast;
+using boost::bad_lexical_cast;
+
+int main()
+{
+
+ // to convert data type into string format
+  int s = 23;
+  string s = lexical_cast<string>(s);
+  str = "Message: " + lexical_cast<string>('A') + "=" + lexical_cast<string>(34.5);
+  array<char,64> msg = lexical_cast< array<char,64> >(23);
+  
+ //to conver a string data type to any other data type
+  s = lexical_cast<int>("235");
+  try{
+    s = lexical_cast<int>("235.65"); //bad_lexical_cast
+    s = lexical_cast<int>("235yui,3"); // ok here it consider only first 3 
+  }
+  catch(bad_lexical_cast &e)
+  {
+    cout<<e.what();
+  }
+}
