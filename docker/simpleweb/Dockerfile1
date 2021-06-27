@@ -1,0 +1,12 @@
+# Specify a base image
+FROM alpine
+
+# Install some depenendencies
+RUN npm install
+
+# Default command
+CMD ["npm", "start"]
+
+# docker build . // will failed, /bin/sh: npm: not found, Since npm packages is not available in alpine base image
+# so what to do, 
+# we will take another image: node
