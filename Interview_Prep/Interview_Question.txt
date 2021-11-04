@@ -1,0 +1,21 @@
+Difference in struct and class in c++?
+what is overloading? Give an example.
+What is overridding? Give an example.
+Difference in overloading and overridding.
+What is declaration and defination?
+Where global variable, static variable and local variable stored in a memory?
+Search interview question for friend function and friend class?
+Can friend member function inherit into the child class?
+what is Enum?
+what is union?
+Difference in union and struct?
+Default method define by compiler in cpp?
+
+Operator over loading, doubt in /home/rj1aditya/Dev/Src/Operator_overloading/OperatorOverloading.cpp 
+
+what is nullptr;
+How can I monitor the thread count of a process on linux?
+    cat /proc/<PROCESS_PID>/status | grep Threads
+    ps -o thcount <pid>
+what happen if pthread_create func call to the same thread id?
+    it creates a new thread with new thread id.

@@ -1,29 +1,49 @@
 #include <iostream>
- 
-class Cents
+
+class Point
 {
 private:
-    int m_cents;
- 
+    double m_x {};
+    double m_y {};
+    double m_z {};
+
 public:
-    Cents(int cents) { m_cents = cents; }
- 
-    // Overload -Cents as a member function
-    Cents operator-() const;
- 
-    int getCents() const { return m_cents; }
+    Point(double x=0.0, double y=0.0, double z=0.0):
+        m_x{x}, m_y{y}, m_z{z}
+    {
+    }
+
+    // Convert a Point into its negative equivalent
+    Point operator- () const;
+
+    // Return true if the point is set at the origin
+    bool operator! () const;
+
+    double getX() const { return m_x; }
+    double getY() const { return m_y; }
+    double getZ() const { return m_z; }
 };
- 
-// note: this function is a member function!
-Cents Cents::operator-() const
+
+// Convert a Point into its negative equivalent
+Point Point::operator- () const
 {
-    return Cents(-m_cents);
+    return Point(-m_x, -m_y, -m_z);
 }
- 
+
+// Return true if the point is set at the origin, false otherwise
+bool Point::operator! () const
+{
+    return (m_x == 0.0 && m_y == 0.0 && m_z == 0.0);
+}
+
 int main()
 {
-    const Cents nickle(5);
-    std::cout << "A nickle of debt is worth " << (-nickle).getCents() << " cents\n";
- 
+    Point point{}; // use default constructor to set to (0.0, 0.0, 0.0)
+
+    if (!point)
+        std::cout << "point is set at the origin.\n";
+    else
+        std::cout << "point is not set at the origin.\n";
+
     return 0;
 }

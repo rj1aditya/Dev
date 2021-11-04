@@ -1,0 +1,4 @@
+* Forward List is preferred over list when only forward traversal is required. * We can save space. 
+* Some example: chaining in hashing, adjacency list representation of graph.
+
+Iterator: 
