@@ -19,3 +19,8 @@ How can I monitor the thread count of a process on linux?
     ps -o thcount <pid>
 what happen if pthread_create func call to the same thread id?
     it creates a new thread with new thread id.
+
+what is to_array? in c++20 introduced?
+ const auto& cats{ std::to_array<Cat>({{ "Fred" }, { "Misty" }, { "Zeke" }}) };
+what is this for loop
+    for (const auto& cat : cats)

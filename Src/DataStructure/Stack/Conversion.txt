@@ -1,0 +1,58 @@
+	Infix To Postfix
+	
+1. read from left to right.
+2. store operands in string.
+3. push operator in stack if high priority.
+4. pop all operator and store in string if current operator is lower priority then push this lower
+priority operator in stack.
+5. if ( comes then push it in stack.
+6. if ) comes then pop all operator from stack and store in string till ) does not encounter.
+
+Note: In one particular function we can define priority of operator.
+--------------------------------------------------------------------------------------------------
+
+	Postfix to Infix
+	
+1. Read from left to right.
+2. push operand in stack.
+3. if operator encounter then pop 2 operand from stack and make new string and push back in stack. 
+	
+	"(" + operand2 + "operator" + operand1 + ")"
+	
+------------------------------------------------------------------------------------------------------
+
+	Infix to prefix
+	
+1. Reverse string.
+2. "( became )" and ") became (" so correct it first.
+3. call InfixtoPostfix( exp )
+4. reverse this new string again.
+
+-------------------------------------------------------------------------------------------------------
+
+	Prefix to Infix
+
+1. Read from Right to left
+2. Follow same procedure as Postfix to Infix and push back new string in stack. but
+	"(" + operand1 + "operator" + operand2 + ")"
+	
+--------------------------------------------------------------------------------------------------------
+
+	Prefix to Postfix
+	
+1. Read in reverese order.
+2. push operand in stack.
+3. if operator encounter then
+string = operand1 + operand2 + operator
+push them back.
+
+--------------------------------------------------------------------------------------------------------
+
+	Postfix to prefix
+1. Read from left to right.
+2. push operand in stack.
+3. if operator then
+string = operator + operand2 + operand1
+push them back.
+
+--------------------------------------------------------------------------------------------------------

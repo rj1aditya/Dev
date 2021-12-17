@@ -5,7 +5,7 @@ int main()
 	Array<int> intArray(12);
 	Array<double> doubleArray(12);
 
-	for (int count{ 0 }; count < intArray.getLength(); ++count)
+	for (int count{ 0 }; count < 2; ++count)
 	{
 		intArray[count] = count;
 		doubleArray[count] = count + 0.5;
