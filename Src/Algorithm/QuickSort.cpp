@@ -37,7 +37,7 @@ void QuickSort(int *arr, int s, int e)
 
 int main()
 {
-    int arr[]{4,1,5,2,3,3,1,1,12,31,12,0,2,1};
+    int arr[]{1,2,3,4,5};
 
     int size = sizeof(arr)/sizeof(arr[1]);
 
