@@ -16,7 +16,7 @@ void allSeq(string s, string output)
     allSeq(s.substr(1), output + s[0]);
 
     //Not include 1st letter
-    allSeq(s.substr(1), output);
+    allSeq(s.substr(1), output); 
 }
 
 

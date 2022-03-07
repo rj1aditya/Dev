@@ -1,7 +1,7 @@
 #include<iostream>
 #include<utility>
 using namespace std;
-
+//https://www.youtube.com/watch?v=mB5HXBb_HY8 time complexity explanation
 void mergeIt(int *arr, int l, int m, int r)
 {
     int leftArraySize = m - l + 1;

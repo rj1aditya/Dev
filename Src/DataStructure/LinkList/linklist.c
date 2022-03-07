@@ -76,7 +76,7 @@ static void SwappingNode()
         }
         ptr_prev = ptr;
         ptr = ptr->next;
-    }
+    } 
 
     if( first != second && (first != NULL && second != NULL) )
     {
@@ -153,7 +153,6 @@ struct node* findPalindrone(struct node* ptr, int* palindrone)
     if( ptr->next != NULL )
     {
         temp = findPalindrone(ptr->next, palindrone);
-
     }
 
     if(ptr->data == temp->data && *palindrone )
