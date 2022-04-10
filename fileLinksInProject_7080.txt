@@ -1,0 +1,409 @@
+./SRC/Games/
+./Src/Games/
+	Game1MonsterInheritance.cpp
+./SRC/FileHandling/FileHandlining_C/
+./Src/FileHandling/FileHandlining_C/
+	commandLineArg.cpp
+./SRC/IPC/Socket/
+./Src/IPC/Socket/
+	ReadFunction.cpp
+./SRC/FileHandling/FileHandlining_CPP/include/
+./Src/FileHandling/FileHandlining_CPP/include/
+	add.h
+./SRC/Singleton/
+./Src/Singleton/
+	Singleton1.cpp
+./SRC/VirtualFunction/
+./SRC/CPP_Basic_Prac/
+./Src/VirtualFunction/
+./Src/CPP_Basic_Prac/
+	Diamond.cpp
+./SRC/IPC/IPC/IPC/pthreads/Mutexes/
+./SRC/IPC/SharedMemory/IPC/IPC/pthreads/Mutexes/
+./Src/IPC/IPC/IPC/pthreads/Mutexes/
+./Src/IPC/SharedMemory/IPC/IPC/pthreads/Mutexes/
+	mythread_api (1).h
+	mythread_api.h
+./SRC/IPC/IPC/IPC/GENERIC_SHM_LOCAL/Trees/
+./SRC/IPC/SharedMemory/IPC/IPC/GENERIC_SHM_LOCAL/Trees/
+./Src/IPC/IPC/IPC/GENERIC_SHM_LOCAL/Trees/
+./Src/IPC/SharedMemory/IPC/IPC/GENERIC_SHM_LOCAL/Trees/
+	tree.h
+./SRC/STL/list_doubleLinkList_vs_forward_list_single_link_list/
+./Src/STL/list_doubleLinkList_vs_forward_list_single_link_list/
+	list_basic.cpp
+./SRC/IPC/IPC/ITC/
+./Src/IPC/IPC/ITC/
+	rt.h
+	utils.h
+./SRC/IPC/IPC/IPC/GENERIC_SHM_LOCAL/Queue/
+./SRC/IPC/SharedMemory/IPC/IPC/GENERIC_SHM_LOCAL/Queue/
+./Src/IPC/IPC/IPC/GENERIC_SHM_LOCAL/Queue/
+./Src/IPC/SharedMemory/IPC/IPC/GENERIC_SHM_LOCAL/Queue/
+	Queue.h
+./
+	constructorException.cpp
+./SRC/IPC/Socket/
+./SRC/Singleton/
+./SRC/VirtualFunction/
+./SRC/FileHandling/FileHandlining_C/
+./SRC/CPP_Basic_Prac/
+./SRC/Inheritence/
+./SRC/DataStructure/LinkList/
+./SRC/DataStructure/Stack/
+./SRC/DataStructure/queue/
+./SRC/SmartPointer/
+./SRC/Exception/
+./SRC/MoveConstructor/
+./SRC/problem/
+./SRC/Operator_overloading/
+./SRC/OperatorOverloading/
+./SRC/queue/
+./Src/IPC/Socket/
+./Src/Singleton/
+./Src/VirtualFunction/
+./Src/FileHandling/FileHandlining_C/
+./Src/CPP_Basic_Prac/
+./Src/Inheritence/
+./Src/DataStructure/LinkList/
+./Src/DataStructure/Stack/
+./Src/DataStructure/queue/
+./Src/SmartPointer/
+./Src/Exception/
+./Src/MoveConstructor/
+./Src/problem/
+./Src/Operator_overloading/
+./Src/OperatorOverloading/
+./Src/queue/
+	temp.cpp
+./SRC/VirtualFunction/
+./SRC/STL/
+./SRC/DataStructure/STL/
+./SRC/problem/
+./SRC/OperatorOverloading/
+./Src/VirtualFunction/
+./Src/STL/
+./Src/DataStructure/STL/
+./Src/problem/
+./Src/OperatorOverloading/
+	temp1.cpp
+./SRC/IPC/IPC/IPC/GENERIC_SHM_LOCAL/Stack/
+./SRC/IPC/SharedMemory/IPC/IPC/GENERIC_SHM_LOCAL/Stack/
+./Src/IPC/IPC/IPC/GENERIC_SHM_LOCAL/Stack/
+./Src/IPC/SharedMemory/IPC/IPC/GENERIC_SHM_LOCAL/Stack/
+	stack.h
+./SRC/MoveConstructor/
+./Src/MoveConstructor/
+	move.cpp
+./SRC/DataStructure/Graph/
+./SRC/problem/
+./Src/DataStructure/Graph/
+./Src/problem/
+	populatingNextRightpointer.cpp
+./SRC/FileHandling/FileHandlining_CPP/src/
+./Tietoevry/VSSLinksDetects/
+./Src/FileHandling/FileHandlining_CPP/src/
+	main.cpp
+./Scr/nse500/
+	findAverage.cpp
+./SRC/Stack/
+./Src/Stack/
+	StackType.h
+./SRC/SmartPointer/
+./Src/SmartPointer/
+	moveCopymoveAssignment.cpp
+	unique_ptr_array.cpp
+./Tietoevry/VSSLinksDetects/
+	LinksIdentifier.cpp
+	LinksIdentifier.h
+./SRC/IPC/IPC/IPC/SHM/igmp_pim_synchronisation/
+./SRC/IPC/SharedMemory/IPC/IPC/SHM/igmp_pim_synchronisation/
+./Src/IPC/IPC/IPC/SHM/igmp_pim_synchronisation/
+./Src/IPC/SharedMemory/IPC/IPC/SHM/igmp_pim_synchronisation/
+	shm_struct.h
+./SRC/IPC/IPC/IPC/GENERIC_SHM_LOCAL/
+./SRC/IPC/SharedMemory/IPC/IPC/GENERIC_SHM_LOCAL/
+./SRC/IPC/ServerDesign/sts/
+./Src/IPC/IPC/IPC/GENERIC_SHM_LOCAL/
+./Src/IPC/SharedMemory/IPC/IPC/GENERIC_SHM_LOCAL/
+./Src/IPC/ServerDesign/sts/
+	common.h
+./SRC/IPC/IPC/IPC/GENERIC_SHM_LOCAL/
+./SRC/IPC/SharedMemory/IPC/IPC/GENERIC_SHM_LOCAL/
+./Src/IPC/IPC/IPC/GENERIC_SHM_LOCAL/
+./Src/IPC/SharedMemory/IPC/IPC/GENERIC_SHM_LOCAL/
+	struct.h
+	shm_ds.h
+	Utils.h
+	map.h
+./SRC/IPC/IPC/IPC/pthreads/
+./SRC/IPC/SharedMemory/IPC/IPC/pthreads/
+./Src/IPC/IPC/IPC/pthreads/
+./Src/IPC/SharedMemory/IPC/IPC/pthreads/
+	threadApi.h
+./SRC/tree/
+./SRC/DataStructure/tree/
+./Src/tree/
+./Src/DataStructure/tree/
+	Tree.cpp
+./SRC/IPC/Socket/
+./SRC/SmartPointer/
+./SRC/Operator_overloading/
+./Src/IPC/Socket/
+./Src/SmartPointer/
+./Src/Operator_overloading/
+	temp2.cpp
+./SRC/lex_yacc/
+./Src/lex_yacc/
+	expr.tab.h
+./SRC/FileHandling/FileHandlining_CPP/
+./Src/FileHandling/FileHandlining_CPP/
+	fstream.cpp
+./SRC/functionPointer/
+./Src/functionPointer/
+	funcPtrToMemberFunc.cpp
+	functionPtr.cpp
+./SRC/DesignPattern/
+./Src/DesignPattern/
+	LRU.cpp
+	threeton.cpp
+	lru.cpp
+	Singleton.cpp
+./SRC/IPC/Socket/
+./SRC/Socket/
+./Src/IPC/Socket/
+./Src/Socket/
+	server.cpp
+./SRC/AdvanceCpp/
+./Src/AdvanceCpp/
+	virtualCopyConstructor.cpp
+	virtualConstructor.cpp
+./SRC/Graph/
+./SRC/DataStructure/Graph/
+./Src/Graph/
+./Src/DataStructure/Graph/
+	BFS.cpp
+	Graph.cpp
+./SRC/SharedPointer/
+./Src/SharedPointer/
+	auto_pointer.cpp
+./SRC/LinkList/
+./Src/LinkList/
+	L.cpp
+	Link.cpp
+	DisplayLunStatus.cpp
+	Demo.cpp
+./SRC/CPP_Basic_Prac/
+./Src/CPP_Basic_Prac/
+	virtualTableInMultipleInheritance.cpp
+	NameHiding.cpp
+	TypeCasting.cpp
+	String_getline.cpp
+	staticInsideClass.cpp
+./SRC/STL/vector/
+./Src/STL/vector/
+	basic.cpp
+./SRC/STL/
+./SRC/DataStructure/STL/
+./Src/STL/
+./Src/DataStructure/STL/
+	Pair.cpp
+	tuple.cpp
+./SRC/STL/map/
+./SRC/DataStructure/STL/map/
+./Src/STL/map/
+./Src/DataStructure/STL/map/
+	UserClassMap.cpp
+	multi_map.cpp
+./SRC/OperatorOverloading/
+./Src/OperatorOverloading/
+	subscriptOperator.cpp
+	AssignmentOperator.cpp
+	functors.cpp
+	parenthesisOperator.cpp
+./SRC/
+./Src/
+	temp34.cpp
+	InterviewCompany.cpp
+./SRC/DataStructure/Graph/
+./Src/DataStructure/Graph/
+	DFSAlgo.cpp
+	prism.cpp
+	BFSAlgo.cpp
+./SRC/DataStructure/Graph/
+./SRC/DataStructure/LinkList/
+./Src/DataStructure/Graph/
+./Src/DataStructure/LinkList/
+	InsertionSortLL.cpp
+./SRC/IPC/IPC/IPC/GENERIC_SHM_LOCAL/LinkedList/
+./SRC/IPC/SharedMemory/IPC/IPC/GENERIC_SHM_LOCAL/LinkedList/
+./Src/IPC/IPC/IPC/GENERIC_SHM_LOCAL/LinkedList/
+./Src/IPC/SharedMemory/IPC/IPC/GENERIC_SHM_LOCAL/LinkedList/
+	LinkedListApi.h
+./SRC/DataStructure/LinkList/
+./Src/DataStructure/LinkList/
+	gen.cpp
+	SortLinkList.cpp
+./SRC/DataStructure/LinkList/
+./SRC/LinkList/
+./Src/DataStructure/LinkList/
+./Src/LinkList/
+	LinkList.cpp
+	DoubleLinkList.cpp
+	LinkList.h
+./SRC/Exception/
+./Src/Exception/
+	tryCatchthrow.cpp
+	ExceptionClass.cpp
+./SRC/VirtualFunction/
+./Src/VirtualFunction/
+	bitCopyPrevent.cpp
+	VirtualDestructor.cpp
+	Covariantreturn.cpp
+	virtual.cpp
+	overrideSpeacifier.cpp
+	FinalSpecifier.cpp
+./SRC/Operator_overloading/
+./Src/Operator_overloading/
+	Operator_overloading_frind.cpp
+	OperatorOverloading.cpp
+	UnaryOperator.cpp
+	mamals.cpp
+	temp3.cpp
+./SRC/DataStructure/Stack/
+./Src/DataStructure/Stack/
+	myStack.cpp
+	SpanByStack.cpp
+	FullStack.cpp
+./docker/frontend/node_modules/nan/
+	nan_private.h
+	nan_callbacks_12_inl.h
+	nan_scriptorigin.h
+	nan_callbacks.h
+	nan_object_wrap.h
+	nan_callbacks_pre_12_inl.h
+	nan_new.h
+	nan_string_bytes.h
+	nan_converters_43_inl.h
+	nan_converters_pre_43_inl.h
+	nan_maybe_43_inl.h
+	nan_json.h
+	nan.h
+	nan_typedarray_contents.h
+	nan_implementation_pre_12_inl.h
+	nan_weak.h
+	nan_define_own_property_helper.h
+	nan_persistent_12_inl.h
+	nan_maybe_pre_43_inl.h
+	nan_implementation_12_inl.h
+	nan_converters.h
+	nan_persistent_pre_12_inl.h
+./SRC/thread/
+./Src/thread/
+	threethreadprintingseq.cpp
+	thread.cpp
+	even_odd_thread.cpp
+	t1t2t3.cpp
+	ThreadRaill.cpp
+	transform.cpp
+	even_odd.cpp
+	RaceCondition.cpp
+	ThreadUsingVector.cpp
+	EventHandling.cpp
+	detach.cpp
+	TransformIntUsingFuncPointer.cpp
+./SRC/FileHandling/FileHandlining_CPP/src/
+./Src/FileHandling/FileHandlining_CPP/src/
+	add.cpp
+./SRC/DataStructure/queue/
+./SRC/queue/
+./Src/DataStructure/queue/
+./Src/queue/
+	cache_queue.cpp
+./SRC/DataStructure/Stack/
+./SRC/Stack/
+./Src/DataStructure/Stack/
+./Src/Stack/
+	PostfixToInfix.cpp
+	HighestGPA.cpp
+	InfixToPreFix.cpp
+	LinkedStackTypeMain.cpp
+	StackMain.cpp
+	PostFixMain.cpp
+	LinkedStacktype.h
+	InfixToPostFix.cpp
+	span.cpp
+	StackADT.cpp
+	StackADT.h
+	MyStack.h
+./SRC/Algorithm/
+./Src/Algorithm/
+	huff.cpp
+	CountingSort.cpp
+	SelectionSort.cpp
+	MergeSort.cpp
+	Huffman.cpp
+	MyBubbleSort.cpp
+	factorial.cpp
+	fibonacci.cpp
+	MyInsertionSort.cpp
+	toh.cpp
+	QuickSort.cpp
+./SRC/problem/
+./Src/problem/
+	divide2integers.cpp
+	longestStringChain.cpp
+	snapShotArray.cpp
+	maxAreaOfIsland.cpp
+	floodfill.cpp
+	find1standlastpos.cpp
+	partitionLable.cpp
+	mincostclaimstair.cpp
+	3sum.cpp
+	rearrangeSpace.cpp
+	scoreofparenthesis.cpp
+	SentanceScreenFitting.cpp
+	maximumDiffInnodeandAncestor.cpp
+	searchInrotatedArray.cpp
+	Matrix.cpp
+	printAllSubsequenceOfstring.cpp
+	robber.cpp
+	SequentialDigits.cpp
+	pointerInVector.cpp
+	friend.cpp
+	searchInRotatedArray2.cpp
+	replaceString.cpp
+	maximumscore.cpp
+	findSquare.cpp
+	minimumFallingPath.cpp
+	stockPricefluctuation.cpp
+	employeeImportance.cpp
+	medianof2SortedArray.cpp
+	countsquaresubmatrix.cpp
+	permutationInString.cpp
+	MinimumHeightTrees.cpp
+	LongestArithmeticSubsequenceofGivenDifference.cpp
+	permutationofastring.cpp
+	carfleet.cpp
+	mergetwoBinaryTree.cpp
+	productofarrayexcepself.cpp
+	MaximalSquare.cpp
+	splitArrayIntoconsecutivesubarray.cpp
+	designAddandSearchword.cpp
+	maxXORof2num.cpp
+	longestcommonsubsequence.cpp
+	decodeString.cpp
+	numberOfMatchingSubsequences.cpp
+	singleThreadedCPU.cpp
+	diagonalTraversal.cpp
+	permutationInaString.cpp
+./SRC/DataStructure/tree/
+./Src/DataStructure/tree/
+	heap.cpp
+./SRC/template/
+./Src/template/
+	Array.h
+	FunctionTemplateSpecialization.cpp
+	Array.cpp
+	template.cpp
+	ArrayMain.cpp

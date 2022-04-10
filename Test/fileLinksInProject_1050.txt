@@ -1,0 +1,7 @@
+./A/ABC/ABC/
+./A/ABC/PQR/
+./A/KLM/
+./A/PQR/
+./A/XYZ/
+	file1.cpp
+	file.cpp

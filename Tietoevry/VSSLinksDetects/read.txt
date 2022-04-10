@@ -1,0 +1,29 @@
+###################################################################################################
+Want to design a small task-C++ development task.
+###################################################################################################
+Earlier ProFamily product stored in Microsoft Visual SourceSafe (VSS).
+One of the feature of VSS was, it links the same file to the different projects, making the file appear in several places in a directory structure.
+##################################################################################################
+Since VSS is discontinued, and we migrated to modern revision control system(where above mention feature is not of linking files is not supported).
+
+Now we wanted to remove that linking feature, so we decided to develope a tool that will find those links by identifying the sililar files directly in the file system.
+Basic case is to identify the similar file by its name simply, but advance case is to check its content also.
+#####################################################################################################################
+
+
+##############################
+Design
+1. Code is written in C++, x64 compiler is used to built the tool
+
+Constraint
+1. Performance is an issue; the program should be fast even with thousands of files and projects.
+
+2. There should be no practical limit on number of files and projects as well as folder depth given huge projects.
+###############################################################################
+
+Specifics
+The program should take 1 argument on the CLI as the path to the base folder of the tree of files to scan. << done
+The tree should be scanned for source files of at least the types *.c, *.h, *.cpp, and *.rc
+
+
+########################################################################

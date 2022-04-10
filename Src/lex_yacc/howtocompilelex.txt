@@ -1,0 +1,8 @@
+flex -o simple.c simple.l
+gcc simple.c -ll
+
+OR
+
+flex simple.l
+gcc lex.yy.c
+
