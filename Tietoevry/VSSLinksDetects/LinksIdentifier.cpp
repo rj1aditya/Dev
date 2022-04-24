@@ -40,7 +40,8 @@ void ErrorHandle::validation()
 // ErrorHandle class Definations Ends
 
 // ProjectsList class Definations starts
-string filters[5] = {"*.cpp", "*.h", "*.cpp", "*.rc"};
+string filters[5] = {"*.cpp", "*.h", "*.cxx", "*.rc"};
+
 ProjectsList *objPtr = NULL;
 
 //Callback function, to register in ftw function to get the directory structure
@@ -102,6 +103,8 @@ void ProjectsList::findLinks()
                 }
             }
             mm.insert({filename, pro});
+            //file -> A, B, C , D, E
+
             pro.clear();
         }
     }
@@ -156,12 +159,9 @@ void scan(ProjectsList &ptr, const char *path)
 {
     string newPath = string(path);
 
-    // taking first root folder
-    int pos = newPath.substr(2).find("/");
-
     // taking file name
     auto it = newPath.rbegin();
-
+    
     string filename;
     while (*it != '/')
     {
