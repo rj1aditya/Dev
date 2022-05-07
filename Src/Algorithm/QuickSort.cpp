@@ -1,5 +1,5 @@
-#include<iostream>
-#include<utility>
+#include <iostream>
+#include <utility>
 using namespace std;
 void swap(int *x, int *y)
 {
@@ -13,9 +13,9 @@ int partition(int *arr, int s, int e)
     int piv = arr[e];
     int i = s;
     int c;
-    for(c = s; c < e; c++ )
+    for (c = s; c < e; c++)
     {
-        if( arr[c] < piv )
+        if (arr[c] < piv)
         {
             swap(arr[c], arr[i]);
             i++;
@@ -27,24 +27,24 @@ int partition(int *arr, int s, int e)
 
 void QuickSort(int *arr, int s, int e)
 {
-    if( s < e )
+    if (s < e)
     {
         int pi = partition(arr, s, e);
         QuickSort(arr, s, pi - 1);
-        QuickSort(arr, pi+1, e);
+        QuickSort(arr, pi + 1, e);
     }
 }
 
 int main()
 {
-    int arr[]{1,2,3,4,5};
+    int arr[]{1, 2, 3, 4, 5};
 
-    int size = sizeof(arr)/sizeof(arr[1]);
+    int size = sizeof(arr) / sizeof(arr[1]);
 
-    QuickSort(arr, 0, size -1);
-    for(int i =0; i< size;i++)
+    QuickSort(arr, 0, size - 1);
+    for (int i = 0; i < size; i++)
     {
-        cout<<arr[i]<<" ";
+        cout << arr[i] << " ";
     }
     return 0;
 }

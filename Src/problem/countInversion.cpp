@@ -1,6 +1,4 @@
-#include<bits/stdc++.h>
-using namespace std;
-class Solution1
+class Solution
 {
     long long ans = 0;
     // arr[]: Input Array
@@ -68,27 +66,5 @@ public:
         // Your Code Here
         cnt(arr, 0, N - 1);
         return ans;
-    }
-
-    bool isAnagram(string a, string b)
-    {
-
-        // Your code here
-        if (a.length() != b.length())
-            return false;
-
-        vector<int> v1(26, 0);
-        vector<int> v2(26, 0);
-
-        for (int i = 0; i < a.length(); i++)
-        {
-            v1[a[i] - 'a']++;
-            v2[b[i] - 'a']++;
-        }
-
-        if (v1 == v2)
-            return true;
-
-        return false;
     }
 };

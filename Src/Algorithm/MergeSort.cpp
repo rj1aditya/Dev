@@ -55,19 +55,22 @@ void mergeIt(int *arr, int l, int m, int r)
 
 void breakIt(int *arr, int l, int r)
 {
-    if (l == r)
-        return;
+    // if (l == r)
+    //     return;
     int m = l + (r - l) / 2;
-
-    breakIt(arr, l, m);
-    breakIt(arr, m + 1, r);
-    mergeIt(arr, l, m, r);
+    if (l < r)
+    {
+        breakIt(arr, l, m);
+        breakIt(arr, m + 1, r);
+        mergeIt(arr, l, m, r);
+    }
 }
 
 void mergeSort(int *arr, int l, int r)
 {
     breakIt(arr, l, r);
 }
+
 class SS
 {
     long long ans = 0;
@@ -129,7 +132,8 @@ class SS
             merge(arr, left, mid, right);
         }
     }
-    public:
+
+public:
     long long int inversionCount(long long arr[], long long N)
     {
         // Your Code Here
@@ -137,7 +141,6 @@ class SS
         return ans;
     }
 };
-
 
 int main()
 {
