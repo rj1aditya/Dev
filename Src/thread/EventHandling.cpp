@@ -29,9 +29,9 @@ class A
 	
 	void load_main()
 	{
-		std::unique_lock<std::mutex> mlock(mu);
 		this_thread::sleep_for(std::chrono::milliseconds(1000));
 		cout<<"Handshake with network 1000/1001"<<endl;
+		std::unique_lock<std::mutex> mlock(mu);
 		//c.wait( mu, bind(&A::sig_e, this) );
 		c.wait(mlock, std::bind(&A::sig_e, this));
 		cout<<"Now further procedure.."<<endl;

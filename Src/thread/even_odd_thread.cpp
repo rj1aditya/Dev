@@ -1,47 +1,50 @@
-#include<iostream>
-#include<condition_variable>
-#include<thread>
-#include<mutex>
+#include <iostream>
+#include <condition_variable>
+#include <thread>
+#include <mutex>
 
 using namespace std;
 
-int count = 1;
+int icount = 1;
 condition_variable c;
 mutex m;
 
-void printNum( bool sig )
+void printNum(bool sig)
 {
-	if( sig )
+
+	if (sig)
 	{
-		while( count < 100 )
+		while (icount < 100)
 		{
 			unique_lock<mutex> ulock(m);
-			c.wait( ulock, [](){return count%2;});
-			cout<<this_thread::get_id()<<" "<<count<<endl;
-			count++;
+			c.wait(ulock, []()
+				   { return icount % 2; });
+			cout << this_thread::get_id() << " Odd		Thread	" << icount << endl;
+			icount++;
 			ulock.unlock();
-			c.notify_all();
+			c.notify_one();
 		}
 	}
 	else
 	{
-		while( count <= 100 )
+		while (icount <= 100)
 		{
 			unique_lock<mutex> ulock(m);
-			c.wait( ulock, [](){return !(count%2);});
-			cout<<this_thread::get_id()<<" "<<count<<endl;
-			count++;
+			c.wait(ulock, []()
+				   { return !(icount % 2); });
+			cout << this_thread::get_id() << " Even 	Thread	" << icount << endl;
+			icount++;
 			ulock.unlock();
-			c.notify_all();
+			c.notify_one();
 		}
 	}
 }
 
 int main()
 {
-	thread even_thread( printNum, 0 );
-	thread odd_thread( printNum, 1 );
-	
+	thread even_thread(printNum, 0);
+	thread odd_thread(printNum, 1);
+
 	even_thread.join();
 	odd_thread.join();
 }

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="BackendCodeEditorMiscSettings">
+    <option name="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=SwitchToGoToActionSuggester/@EntryIndexedValue" value="true" type="bool" />
+    <option name="/Default/Housekeeping/GlobalSettingsUpgraded/IsUpgraded/@EntryValue" value="true" type="bool" />
+    <option name="/Default/RiderDebugger/RiderRestoreDecompile/RestoreDecompileSetting/@EntryValue" value="false" type="bool" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="52f333d3-6c4b-4147-86ea-eb85a0cc5e44" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../../../../../../../Aryan_LLD_YT/practice/builder.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/temp.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../behavioralpatterns/state/SwiggyOrder_with_state_pattern.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../behavioralpatterns/state/SwiggyOrder_wo_state_pattern.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../creationalpatterns/factory/FileOpe.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../creationalpatterns/factory/FileOpe.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../creationalpatterns/factory/file.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../../../../../Stack/queueImplementation.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../../../../../thread/future_promise.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../AdvanceCpp/a.out" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../AdvanceCpp/a.out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../Algorithm/CountingSort.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../Algorithm/CountingSort.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../Algorithm/MergeSort.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../Algorithm/MergeSort.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../Algorithm/QuickSort.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../Algorithm/QuickSort.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../Algorithm/SelectionSort.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../Algorithm/SelectionSort.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../DataStructure/Graph/BFSAlgo.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../DataStructure/Graph/BFSAlgo.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../DataStructure/Graph/DFSAlgo.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../DataStructure/Graph/DFSAlgo.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../LRU.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../LRU.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../LinkList/L.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../LinkList/Link.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../LinkList/a.out" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../LinkList/a.out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../problem/3sum.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../problem/3sum.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../problem/a.out" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../problem/a.out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../thread/EventHandling.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../thread/EventHandling.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../thread/a.out" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../thread/a.out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../thread/detach.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../thread/detach.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../thread/even_odd.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../thread/even_odd.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../thread/even_odd_thread.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../thread/even_odd_thread.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../thread/t1t2t3.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../thread/t1t2t3.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../thread/thread_inc.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../thread/thread_inc.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../thread/thread1.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../../docker/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../../docker/frontend/package-lock.json" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../../../../../../.." />
+  </component>
+  <component name="MacroExpansionManager">
+    <option name="directoryName" value="RMlfHIDw" />
+  </component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 4
+}]]></component>
+  <component name="ProjectId" id="39FaXcNaW2ucF6aCj71uAa7reZd" />
+  <component name="ProjectStatusUIService"><![CDATA[{
+  "uiKindId": "Widget"
+}]]></component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.RadMigrateCodeStyle": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "Src",
+    "nodejs_package_manager_path": "npm",
+    "org.rust.first.attach.projects": "true",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="52f333d3-6c4b-4147-86ea-eb85a0cc5e44" name="Changes" comment="" />
+      <created>1770294312854</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1770294312854</updated>
+      <workItem from="1770294314056" duration="59000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

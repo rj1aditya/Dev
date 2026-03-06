@@ -1,44 +1,38 @@
-#include<iostream>
-#include<thread>
-#include<unistd.h>
+#include <iostream>
+#include <thread>
+#include <unistd.h>
 using namespace std;
 
 class wrapper
 {
     thread &d_thread;
 
-    public:
-    wrapper(thread &a):d_thread(a)
-    {
-
-    }
-
+public:
+    wrapper(thread &a) : d_thread(a) {}
     ~wrapper()
     {
-        if(d_thread.joinable())
+        if (d_thread.joinable())
         {
-            d_thread.detach();
+
+            d_thread.detach(); // safer than detach
         }
     }
 };
 
 void func()
 {
-	int i=0;
-	while(  1 ){
-	cout<<i<<"bjp voitng counter"<<endl;
-    sleep(5);
+    int i = 0;
+    while (i < 5)
+    { // run 5 times only for demo
+        cout << i++ << " bjp voting counter" << endl;
+        sleep(1);
     }
 }
 
 int main()
 {
-	thread td1(func);
-
+    thread td1(func);
     wrapper obj(td1);
-
-    cout<<"exiting"<<endl;
-
-    
+    cout << "exiting main..." << endl;
     return 0;
 }

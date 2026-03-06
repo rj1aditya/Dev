@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/Users/rj1aditya/Desktop/T1/Src/Dev/Dev/SRC/DesignPattern/lld-lowleveldesign-main/src/main/java/com/conceptcoding/behavioralpatterns/state",
+      "program": "/Users/rj1aditya/Desktop/T1/Src/Dev/Dev/SRC/DesignPattern/lld-lowleveldesign-main/src/main/java/com/conceptcoding/behavioralpatterns/state/build/Debug/outDebug"
+    }
+  ]
+}
