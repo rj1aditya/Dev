@@ -1,8 +1,0 @@
-
-%%
-
-hello	{ printf("Bye\n"); }
-
-%%
-
-

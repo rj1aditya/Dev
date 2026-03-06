@@ -1,8 +1,0 @@
-bin-expr: expr.c expr.tab.c
-	gcc -o bin-expr expr.c expr.tab.c -ll -ly
-
-expr.c: expr.l expr.tab.h
-	flex -t expr.l > expr.c
-
-expr.tab.c: expr.y
-	bison expr.y
