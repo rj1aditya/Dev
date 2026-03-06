@@ -1,0 +1,34 @@
+STL has 4 components
+1. Algorithm
+2. Container
+3. Iterator
+4. Function
+
+
+Algorithm:
+    * sorting
+    * Searcing
+    * Important STL Algorithm
+    * Useful array Algorithm
+    * partition operation
+
+Container:
+    Sequence Container, Container Adapter, Associate Container
+
+    Sequence Container:
+        Vector
+        list
+        forward_list
+        deque
+        array
+    
+    Container Adapter:
+        queue
+        priority_queue
+        stack
+    
+    Associate Container
+        set
+        multiset
+        map
+        multimap

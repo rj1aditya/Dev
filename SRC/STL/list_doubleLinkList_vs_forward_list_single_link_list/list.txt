@@ -1,0 +1,48 @@
+* Lists are sequence containers that allow non-contiguous memory allocation.
+* As compared to vector, list has slow traversal. 
+* Insertion and deletion are quick. 
+* List -> doubly linked list. 
+* Forward list -> singly linked list.
+
+Iterators
+
+* begin() – Returns an iterator pointing to the first element in the list
+* end() – Returns an iterator pointing to the last element
+
+Element access:
+
+* front()
+* back() this function returns the element in the list.
+
+Useful function:
+
+* size()
+* sort() - sort the list in increasing order
+* swap() - swap the list, same type and size.
+* reverse()
+* clear()
+* unique() - Removes all duplicate consecutive elements from the list.
+* erase() – Removes a single element or a range of elements from the list.
+* empty() – Returns whether the list is empty(1) or not(0).
+
+* insert() – Inserts new elements in the list at a specified position.
+The list::insert() is used to insert the elements at any position of list. This function takes 3 elements, position, number of elements to insert and value to insert. If not mentioned, number of elements is default set to 1.
+e.g. insert(pos_iter, ele_num, ele)
+
+* remove() - demoList.remove(20); // delete all elements with value 20.
+* assign() – Assigns new elements to list by replacing current elements and resizes the list.
+e.g.     
+    list<int> demo_list;
+  
+    // Assigning the value 100, 5 times
+    // to the list, list_demo.
+    demo_list.assign(5, 100);
+
+* push_front(g) – Adds a new element ‘g’ at the beginning of the list .
+* push_back(g) – Adds a new element ‘g’ at the end of the list.
+* pop_front() – Removes the first element of the list, and reduces size of the list by 1.
+* pop_back() – Removes the last element of the list, and reduces size of the list by 1
+
+
+
+

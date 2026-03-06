@@ -1,0 +1,21 @@
+#include<iostream>
+using namespace std;
+
+class A
+{
+	public:
+		A()
+		{
+			cout<<"Constructor called"<<endl;
+		}
+		A( A &obj )
+		{
+			cout<<"Copy constructor called"<<endl;
+		}
+};
+
+int main()
+{
+	A obj;
+	A obj1(A());
+}
