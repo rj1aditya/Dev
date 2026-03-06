@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="BackendCodeEditorMiscSettings">
+    <option name="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=SwitchToGoToActionSuggester/@EntryIndexedValue" value="true" type="bool" />
+  </component>
+  <component name="CMakeProjectFlavorService">
+    <option name="flavorId" value="CMakePlainProjectFlavor" />
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" ENABLED="true" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="4c37e507-6d78-47b8-bbf8-c5d5e9f0c151" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../../AdvanceCpp/a.out" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../../AdvanceCpp/a.out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../../Algorithm/CountingSort.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../../Algorithm/CountingSort.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../../Algorithm/MergeSort.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../../Algorithm/MergeSort.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../../Algorithm/QuickSort.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../../Algorithm/QuickSort.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../../Algorithm/SelectionSort.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../../Algorithm/SelectionSort.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../../DataStructure/Graph/BFSAlgo.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../../DataStructure/Graph/BFSAlgo.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../../DataStructure/Graph/DFSAlgo.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../../DataStructure/Graph/DFSAlgo.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../LRU.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../LRU.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../../LinkList/L.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../../LinkList/Link.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../../LinkList/a.out" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../../LinkList/a.out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../../problem/3sum.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../../problem/3sum.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../../problem/a.out" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../../problem/a.out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../../thread/EventHandling.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../../thread/EventHandling.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../../thread/a.out" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../../thread/a.out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../../thread/detach.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../../thread/detach.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../../thread/even_odd.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../../thread/even_odd.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../../thread/even_odd_thread.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../../thread/even_odd_thread.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../../thread/t1t2t3.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../../thread/t1t2t3.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../../thread/thread_inc.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../../thread/thread_inc.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../../thread/thread1.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../../../docker/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../../../docker/frontend/package-lock.json" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../../../../../../../.." />
+  </component>
+  <component name="MacroExpansionManager">
+    <option name="directoryName" value="0z2sGiMd" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="38UMX7BaaO9jCH0slHMVTGaa8ON" />
+  <component name="ProjectStatusUIService">{
+  &quot;uiKindId&quot;: &quot;Widget&quot;
+}</component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;C/C++ File.paymentGateway_with_adaptor.cpp.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.RadMigrateCodeStyle&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Src&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;org.rust.first.attach.projects&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RunManager">
+    <configuration name="paymentGateway_with_adaptor.cpp" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="adapter" TARGET_NAME="paymentGateway_with_adaptor.cpp" CONFIG_NAME="paymentGateway_with_adaptor.cpp">
+      <option name="sourceFile" value="paymentGateway_with_adaptor.cpp" />
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="C/C++ File.paymentGateway_with_adaptor.cpp" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4c37e507-6d78-47b8-bbf8-c5d5e9f0c151" name="Changes" comment="" />
+      <created>1768849734381</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1768849734381</updated>
+      <workItem from="1768849737073" duration="2082000" />
+      <workItem from="1768890710341" duration="57000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
