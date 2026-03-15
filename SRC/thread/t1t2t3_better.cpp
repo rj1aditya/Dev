@@ -12,7 +12,7 @@ int counter = 1;
 int turn = 1;
 bool stop = false;
 
-void func2()
+void func1()
 {
     while(!stop && counter <= 100)
     {
