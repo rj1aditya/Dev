@@ -12,6 +12,8 @@
 #include <iomanip>
 #include <thread>
 #include <shared_mutex>
+#include <atomic>
+#include <functional>
 
 using namespace std;
 
@@ -228,7 +230,19 @@ private:
     LocalTime startTime;
     map<int, SeatStatus> seatStatusMap;
     map<int, mutex> seatLocks;  // Per-seat locks for fine-grained concurrency
+    map<int, chrono::steady_clock::time_point> lockExpiryMap;
     mutable shared_mutex showMutex;  // For read/write access to the show
+
+    function<void(const vector<int>&)> onAutoReleaseCallback;
+    atomic<bool> stopExpiryThread{false};
+    thread expiryThread;
+
+    void expiryLoop(int intervalSeconds) {
+        while (!stopExpiryThread.load()) {
+            this_thread::sleep_for(chrono::seconds(intervalSeconds));
+            expireOldLocks();
+        }
+    }
 
 public:
     Show(shared_ptr<Movie> m, shared_ptr<Screen> screen, const LocalDate& date, const LocalTime& time)
@@ -239,6 +253,19 @@ public:
             seatStatusMap[id] = SeatStatus::AVAILABLE;
             seatLocks[id];  // Default construct mutex
         }
+        expiryThread = thread(&Show::expiryLoop, this, 2);
+    }
+
+    ~Show() {
+        stopExpiryThread.store(true);
+        if (expiryThread.joinable()) {
+            expiryThread.join();
+        }
+    }
+
+    void setAutoReleaseCallback(function<void(const vector<int>&)> callback) {
+        unique_lock<shared_mutex> lock(showMutex);
+        onAutoReleaseCallback = move(callback);
     }
 
     shared_ptr<Movie> getMovie() const {
@@ -257,7 +284,7 @@ public:
     }
 
     // Thread-safe seat locking with deadlock prevention
-    bool lockSeats(const vector<int>& seatIds) {
+    bool lockSeats(const vector<int>& seatIds, int ttlSeconds = 120) {
         if (seatIds.empty()) return true;
 
         vector<int> sorted = seatIds;
@@ -266,29 +293,31 @@ public:
         vector<unique_lock<mutex>> locks;
         locks.reserve(sorted.size());
 
-        // Acquire all locks in sorted order
+        // Acquire all per-seat locks in sorted order
         for (int seatId : sorted) {
             auto it = seatLocks.find(seatId);
             if (it == seatLocks.end()) {
-                // Seat not found - rollback acquired locks
                 return false;
             }
             locks.emplace_back(it->second);
         }
 
+        unique_lock<shared_mutex> writeLock(showMutex);
+
         // Validate all seats are available
         for (int seatId : sorted) {
             if (seatStatusMap[seatId] != SeatStatus::AVAILABLE) {
-                return false;  // Locks released via RAII
+                return false;
             }
         }
 
-        // Mark seats as locked
+        auto expiryTime = chrono::steady_clock::now() + chrono::seconds(ttlSeconds);
         for (int seatId : sorted) {
             seatStatusMap[seatId] = SeatStatus::LOCKED;
+            lockExpiryMap[seatId] = expiryTime;
         }
 
-        return true;  // Locks released via RAII
+        return true;
     }
 
     // Confirm booking - assumes seats are already locked
@@ -302,8 +331,10 @@ public:
             locks.emplace_back(seatLocks[seatId]);
         }
 
+        unique_lock<shared_mutex> writeLock(showMutex);
         for (int seatId : sorted) {
             seatStatusMap[seatId] = SeatStatus::BOOKED;
+            lockExpiryMap.erase(seatId);
         }
     }
 
@@ -318,8 +349,33 @@ public:
             locks.emplace_back(seatLocks[seatId]);
         }
 
+        unique_lock<shared_mutex> writeLock(showMutex);
         for (int seatId : sorted) {
             seatStatusMap[seatId] = SeatStatus::AVAILABLE;
+            lockExpiryMap.erase(seatId);
+        }
+    }
+
+    void expireOldLocks() {
+        vector<int> released;
+        auto now = chrono::steady_clock::now();
+
+        {
+            unique_lock<shared_mutex> lock(showMutex);
+            for (auto& [seatId, status] : seatStatusMap) {
+                if (status == SeatStatus::LOCKED) {
+                    auto it = lockExpiryMap.find(seatId);
+                    if (it != lockExpiryMap.end() && it->second <= now) {
+                        status = SeatStatus::AVAILABLE;
+                        released.push_back(seatId);
+                        lockExpiryMap.erase(it);
+                    }
+                }
+            }
+        }
+
+        if (!released.empty() && onAutoReleaseCallback) {
+            onAutoReleaseCallback(released);
         }
     }
 
@@ -512,8 +568,11 @@ private:
 
 public:
     shared_ptr<Booking> book(shared_ptr<User> user, shared_ptr<Show> show, const vector<int>& seats) {
-        // Attempt to lock seats
-        if (!show->lockSeats(seats)) {
+        // Expire stale locked seats before trying to lock requested seats
+        show->expireOldLocks();
+
+        // Attempt to lock seats with TTL (in seconds)
+        if (!show->lockSeats(seats, 30)) {
             throw runtime_error("Seats unavailable or invalid");
         }
 
@@ -569,6 +628,11 @@ int main() {
     // Create screen and show
     auto screen = make_shared<Screen>(1, seats);
     auto show = make_shared<Show>(movie, screen, LocalDate::now(), LocalTime::of(18, 0));
+    show->setAutoReleaseCallback([](const vector<int>& releasedSeats){
+        cout << "Auto-released seats: ";
+        for (int id : releasedSeats) cout << id << " ";
+        cout << "\n";
+    });
     screen->addShow(show);
 
     // Create theatre and services
