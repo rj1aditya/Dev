@@ -10,8 +10,6 @@
 #include <random>
 #include <sstream>
 #include <iomanip>
-#include <thread>
-#include <shared_mutex>
 
 using namespace std;
 
@@ -48,15 +46,15 @@ enum class PaymentStatus {
 class UUID {
 private:
     string id;
-
+    
     static string generateRandomUUID() {
         static random_device rd;
         static mt19937 gen(rd());
         static uniform_int_distribution<int> dis(0, 15);
-
+        
         stringstream ss;
         ss << hex;
-
+        
         // Generate 8-4-4-4-12 format UUID
         for (int i = 0; i < 8; ++i) ss << dis(gen);
         ss << "-";
@@ -67,7 +65,7 @@ private:
         for (int i = 0; i < 4; ++i) ss << dis(gen);
         ss << "-";
         for (int i = 0; i < 12; ++i) ss << dis(gen);
-
+        
         return ss.str();
     }
 
@@ -145,7 +143,7 @@ public:
     }
 
     string toString() const {
-        return (hour < 10 ? "0" : "") + to_string(hour) + ":" +
+        return (hour < 10 ? "0" : "") + to_string(hour) + ":" + 
                (minute < 10 ? "0" : "") + to_string(minute);
     }
 };
@@ -227,107 +225,80 @@ private:
     LocalDate showDate;
     LocalTime startTime;
     map<int, SeatStatus> seatStatusMap;
-    map<int, mutex> seatLocks;  // Per-seat locks for fine-grained concurrency
-    mutable shared_mutex showMutex;  // For read/write access to the show
+    map<int, mutex> seatLocks;
 
 public:
     Show(shared_ptr<Movie> m, shared_ptr<Screen> screen, const LocalDate& date, const LocalTime& time)
         : movie(m), showDate(date), startTime(time) {
-        // Pre-initialize all seat statuses and locks to avoid race conditions
-        for (auto& seat : screen->getSeats()) {
-            int id = seat->getSeatId();
-            seatStatusMap[id] = SeatStatus::AVAILABLE;
-            seatLocks[id];  // Default construct mutex
+        for (auto seat : screen->getSeats()) {
+            seatStatusMap[seat->getSeatId()] = SeatStatus::AVAILABLE;
         }
     }
 
     shared_ptr<Movie> getMovie() const {
-        shared_lock<shared_mutex> lock(showMutex);
         return movie;
     }
 
     LocalDate getShowDate() const {
-        shared_lock<shared_mutex> lock(showMutex);
         return showDate;
     }
 
     LocalTime getStartTime() const {
-        shared_lock<shared_mutex> lock(showMutex);
         return startTime;
     }
 
-    // Thread-safe seat locking with deadlock prevention
     bool lockSeats(const vector<int>& seatIds) {
-        if (seatIds.empty()) return true;
-
         vector<int> sorted = seatIds;
-        sort(sorted.begin(), sorted.end());  // Consistent lock order
+        std::sort(sorted.begin(), sorted.end());
 
-        vector<unique_lock<mutex>> locks;
-        locks.reserve(sorted.size());
+        vector<mutex*> acquiredLocks;
 
-        // Acquire all locks in sorted order
-        for (int seatId : sorted) {
-            auto it = seatLocks.find(seatId);
-            if (it == seatLocks.end()) {
-                // Seat not found - rollback acquired locks
-                return false;
+        try {
+            // Phase 1: acquire all locks
+            for (int seatId : sorted) {
+                seatLocks[seatId].lock();
+                acquiredLocks.push_back(&seatLocks[seatId]);
             }
-            locks.emplace_back(it->second);
-        }
 
-        // Validate all seats are available
-        for (int seatId : sorted) {
-            if (seatStatusMap[seatId] != SeatStatus::AVAILABLE) {
-                return false;  // Locks released via RAII
+            // Phase 2: validate availability
+            for (int seatId : sorted) {
+                if (seatStatusMap[seatId] != SeatStatus::AVAILABLE) {
+                    for (auto lock : acquiredLocks) {
+                        lock->unlock();
+                    }
+                    return false;
+                }
             }
-        }
 
-        // Mark seats as locked
-        for (int seatId : sorted) {
-            seatStatusMap[seatId] = SeatStatus::LOCKED;
-        }
+            // Phase 3: mark LOCKED
+            for (int seatId : sorted) {
+                seatStatusMap[seatId] = SeatStatus::LOCKED;
+            }
 
-        return true;  // Locks released via RAII
+            // Phase 4: release locks
+            for (auto lock : acquiredLocks) {
+                lock->unlock();
+            }
+
+            return true;
+        } catch (...) {
+            for (auto lock : acquiredLocks) {
+                lock->unlock();
+            }
+            return false;
+        }
     }
 
-    // Confirm booking - assumes seats are already locked
     void confirmSeats(const vector<int>& seatIds) {
-        vector<int> sorted = seatIds;
-        sort(sorted.begin(), sorted.end());
-
-        vector<unique_lock<mutex>> locks;
-        locks.reserve(sorted.size());
-        for (int seatId : sorted) {
-            locks.emplace_back(seatLocks[seatId]);
-        }
-
-        for (int seatId : sorted) {
+        for (int seatId : seatIds) {
             seatStatusMap[seatId] = SeatStatus::BOOKED;
         }
     }
 
-    // Release seats back to available
     void releaseSeats(const vector<int>& seatIds) {
-        vector<int> sorted = seatIds;
-        sort(sorted.begin(), sorted.end());
-
-        vector<unique_lock<mutex>> locks;
-        locks.reserve(sorted.size());
-        for (int seatId : sorted) {
-            locks.emplace_back(seatLocks[seatId]);
-        }
-
-        for (int seatId : sorted) {
+        for (int seatId : seatIds) {
             seatStatusMap[seatId] = SeatStatus::AVAILABLE;
         }
-    }
-
-    // Get current seat status (read-only)
-    SeatStatus getSeatStatus(int seatId) const {
-        shared_lock<shared_mutex> lock(showMutex);
-        auto it = seatStatusMap.find(seatId);
-        return (it != seatStatusMap.end()) ? it->second : SeatStatus::AVAILABLE;
     }
 };
 
@@ -440,24 +411,21 @@ public:
 class TheatreService {
 private:
     map<City, vector<shared_ptr<Theatre>>> cityTheatres;
-    mutable shared_mutex serviceMutex;
 
 public:
     void addTheatre(shared_ptr<Theatre> theatre) {
-        unique_lock<shared_mutex> lock(serviceMutex);
         cityTheatres[theatre->getCity()].push_back(theatre);
     }
 
     set<shared_ptr<Movie>> getMovies(City city, const LocalDate& date) {
-        shared_lock<shared_mutex> lock(serviceMutex);
         set<shared_ptr<Movie>> movies;
         auto it = cityTheatres.find(city);
-
+        
         if (it == cityTheatres.end()) return movies;
 
-        for (auto& theatre : it->second) {
-            for (auto& screen : theatre->getScreens()) {
-                for (auto& show : screen->getShows(date)) {
+        for (auto theatre : it->second) {
+            for (auto screen : theatre->getScreens()) {
+                for (auto show : screen->getShows(date)) {
                     movies.insert(show->getMovie());
                 }
             }
@@ -466,16 +434,15 @@ public:
     }
 
     vector<shared_ptr<Theatre>> getTheatres(City city, shared_ptr<Movie> movie, const LocalDate& date) {
-        shared_lock<shared_mutex> lock(serviceMutex);
         vector<shared_ptr<Theatre>> result;
         auto it = cityTheatres.find(city);
-
+        
         if (it == cityTheatres.end()) return result;
 
-        for (auto& theatre : it->second) {
+        for (auto theatre : it->second) {
             bool hasShow = false;
-            for (auto& screen : theatre->getScreens()) {
-                for (auto& show : screen->getShows(date)) {
+            for (auto screen : theatre->getScreens()) {
+                for (auto show : screen->getShows(date)) {
                     if (*show->getMovie() == *movie) {
                         hasShow = true;
                         break;
@@ -491,11 +458,10 @@ public:
     }
 
     vector<shared_ptr<Show>> getShows(shared_ptr<Movie> movie, const LocalDate& date, shared_ptr<Theatre> theatre) {
-        shared_lock<shared_mutex> lock(serviceMutex);
         vector<shared_ptr<Show>> result;
 
-        for (auto& screen : theatre->getScreens()) {
-            for (auto& show : screen->getShows(date)) {
+        for (auto screen : theatre->getScreens()) {
+            for (auto show : screen->getShows(date)) {
                 if (*show->getMovie() == *movie) {
                     result.push_back(show);
                 }
@@ -508,86 +474,276 @@ public:
 class BookingService {
 private:
     map<UUID, shared_ptr<Booking>> bookings;
-    mutable shared_mutex bookingMutex;
 
 public:
     shared_ptr<Booking> book(shared_ptr<User> user, shared_ptr<Show> show, const vector<int>& seats) {
-        // Attempt to lock seats
         if (!show->lockSeats(seats)) {
-            throw runtime_error("Seats unavailable or invalid");
+            throw runtime_error("Seat unavailable");
         }
 
-        try {
-            // Simulate payment processing
-            auto payment = make_shared<Payment>(PaymentStatus::SUCCESS);
+        auto payment = make_shared<Payment>(PaymentStatus::SUCCESS);
 
-            if (payment->getStatus() == PaymentStatus::SUCCESS) {
-                show->confirmSeats(seats);
-                auto booking = make_shared<Booking>(user, show, seats, payment);
-                {
-                    unique_lock<shared_mutex> lock(bookingMutex);
-                    bookings[booking->getBookingId()] = booking;
-                }
-                return booking;
-            } else {
-                show->releaseSeats(seats);
-                throw runtime_error("Payment failed");
-            }
-        } catch (const exception& e) {
-            // Release seats on any failure
+        if (payment->getStatus() == PaymentStatus::SUCCESS) {
+            show->confirmSeats(seats);
+            auto booking = make_shared<Booking>(user, show, seats, payment);
+            bookings[booking->getBookingId()] = booking;
+            return booking;
+        } else {
             show->releaseSeats(seats);
-            throw;
+            throw runtime_error("Payment failed");
         }
     }
 
     shared_ptr<Booking> getBooking(const UUID& bookingId) {
-        shared_lock<shared_mutex> lock(bookingMutex);
         auto it = bookings.find(bookingId);
         if (it != bookings.end()) {
             return it->second;
         }
         return nullptr;
     }
+
+    vector<shared_ptr<Booking>> getBookingsForUser(shared_ptr<User> user) {
+        vector<shared_ptr<Booking>> result;
+        for (auto& pair : bookings) {
+            if (*pair.second->getUser() == *user) {
+                result.push_back(pair.second);
+            }
+        }
+        return result;
+    }
 };
 
 // ============================================================
-// MAIN FUNCTION (Example Usage)
+// CONTROLLER CLASSES
+// ============================================================
+
+class TheatreController {
+private:
+    shared_ptr<TheatreService> theatreService;
+
+public:
+    TheatreController() : theatreService(make_shared<TheatreService>()) {}
+
+    void addTheatre(shared_ptr<Theatre> theatre) {
+        theatreService->addTheatre(theatre);
+    }
+
+    set<shared_ptr<Movie>> getMovies(City city, const LocalDate& date) {
+        return theatreService->getMovies(city, date);
+    }
+
+    vector<shared_ptr<Theatre>> getTheatres(City city, shared_ptr<Movie> movie, const LocalDate& date) {
+        return theatreService->getTheatres(city, movie, date);
+    }
+
+    vector<shared_ptr<Show>> getShows(shared_ptr<Movie> movie, const LocalDate& date, shared_ptr<Theatre> theatre) {
+        return theatreService->getShows(movie, date, theatre);
+    }
+};
+
+class BookingController {
+private:
+    shared_ptr<BookingService> bookingService;
+
+public:
+    BookingController() : bookingService(make_shared<BookingService>()) {}
+
+    shared_ptr<Booking> createBooking(shared_ptr<User> user, shared_ptr<Show> show, const vector<int>& seats) {
+        return bookingService->book(user, show, seats);
+    }
+
+    shared_ptr<Booking> getBooking(const UUID& bookingId) {
+        return bookingService->getBooking(bookingId);
+    }
+
+    vector<shared_ptr<Booking>> getBookingsForUser(shared_ptr<User> user) {
+        return bookingService->getBookingsForUser(user);
+    }
+};
+
+// ============================================================
+// MAIN APPLICATION CLASS
+// ============================================================
+
+class BookMyShowApp {
+private:
+    shared_ptr<TheatreController> theatreController;
+    shared_ptr<BookingController> bookingController;
+
+public:
+    BookMyShowApp() : theatreController(make_shared<TheatreController>()),
+                      bookingController(make_shared<BookingController>()) {}
+
+    void initialize() {
+        /*
+         * 1. Create Movies
+         */
+        auto baahubali = make_shared<Movie>("BAAHUBALI");
+        auto avengers = make_shared<Movie>("AVENGERS");
+
+        /*
+         * 2. Create Theatre -> Screen -> Seats
+         */
+        auto inoxScreen1 = make_shared<Screen>(1, createSeats());
+        auto inoxTheatreBangalore = make_shared<Theatre>(
+            "INOX",
+            City::BANGALORE,
+            vector<shared_ptr<Screen>>{inoxScreen1}
+        );
+
+        auto pvrScreen1 = make_shared<Screen>(1, createSeats());
+        auto pvrTheatreDelhi = make_shared<Theatre>(
+            "PVR",
+            City::DELHI,
+            vector<shared_ptr<Screen>>{pvrScreen1}
+        );
+
+        theatreController->addTheatre(inoxTheatreBangalore);
+        theatreController->addTheatre(pvrTheatreDelhi);
+
+        /*
+         * 3. Create Shows
+         */
+        auto inoxMorningShowToday = make_shared<Show>(
+            baahubali,
+            inoxScreen1,
+            LocalDate::now(),
+            LocalTime::of(8, 0)
+        );
+
+        auto inoxAfternoonShowToday = make_shared<Show>(
+            baahubali,
+            inoxScreen1,
+            LocalDate::now(),
+            LocalTime::of(15, 0)
+        );
+
+        auto inoxEveningShowToday = make_shared<Show>(
+            avengers,
+            inoxScreen1,
+            LocalDate::now(),
+            LocalTime::of(18, 0)
+        );
+
+        auto pvrMorningShowTomorrow = make_shared<Show>(
+            baahubali,
+            pvrScreen1,
+            LocalDate::now().plusDays(1),
+            LocalTime::of(9, 0)
+        );
+
+        // Attach shows to screens
+        inoxScreen1->addShow(inoxMorningShowToday);
+        inoxScreen1->addShow(inoxAfternoonShowToday);
+        inoxScreen1->addShow(inoxEveningShowToday);
+        pvrScreen1->addShow(pvrMorningShowTomorrow);
+    }
+
+    void userFlow() {
+        // User enters system
+        auto user = make_shared<User>("U1", "Shrayansh");
+
+        cout << "User logged in: Shrayansh" << endl;
+
+        // 1. User selects city
+        City selectedCity = City::BANGALORE;
+        cout << "Selected City: BANGALORE" << endl;
+
+        // 2. For specific date, show movies running in city
+        LocalDate selectedDate = LocalDate::now();
+        cout << "Selected Date: " << selectedDate.toString() << endl;
+
+        auto movies = theatreController->getMovies(selectedCity, selectedDate);
+        cout << "Movies available:" << endl;
+        for (auto movie : movies) {
+            cout << " - " << movie->getName() << endl;
+        }
+
+        // 3. User selects movie
+        if (movies.empty()) {
+            cout << "No movies available" << endl;
+            return;
+        }
+
+        auto selectedMovie = *movies.begin();
+        cout << "Selected Movie: " << selectedMovie->getName() << endl;
+
+        // 4. Show theatres and show times in city
+        auto theatres = theatreController->getTheatres(selectedCity, selectedMovie, selectedDate);
+        cout << "Theatres available:" << endl;
+        for (auto theatre : theatres) {
+            cout << " - " << theatre->getName() << endl;
+        }
+
+        if (theatres.empty()) {
+            cout << "No theatres available" << endl;
+            return;
+        }
+
+        // 6. User selects theatre
+        auto selectedTheatre = theatres[0];
+        cout << "Selected Theatre: " << selectedTheatre->getName() << endl;
+
+        // 7. Show running shows for movie + date + theatre
+        auto shows = theatreController->getShows(selectedMovie, selectedDate, selectedTheatre);
+
+        cout << "Shows available:" << endl;
+        for (auto show : shows) {
+            cout << " - " << show->getStartTime().toString() << endl;
+        }
+
+        if (shows.empty()) {
+            cout << "No shows available" << endl;
+            return;
+        }
+
+        // 8. User selects show
+        auto selectedShow = shows[0];
+        cout << "Selected Show Time: " << selectedShow->getStartTime().toString() << endl;
+
+        // 9. User selects seats
+        vector<int> selectedSeats = {1, 2, 3};
+        cout << "Selected Seats: ";
+        for (int seat : selectedSeats) {
+            cout << seat << " ";
+        }
+        cout << endl;
+
+        // 10. Booking + Payment
+        try {
+            auto booking = bookingController->createBooking(user, selectedShow, selectedSeats);
+            cout << "BOOKING SUCCESSFUL" << endl;
+            cout << "Booking ID: " << booking->getBookingId().toString() << endl;
+        } catch (const exception& e) {
+            cout << "Booking failed: " << e.what() << endl;
+        }
+    }
+
+    vector<shared_ptr<Seat>> createSeats() {
+        vector<shared_ptr<Seat>> seats;
+        for (int i = 1; i <= 20; i++) {
+            seats.push_back(make_shared<Seat>(i, SeatCategory::SILVER));
+        }
+        return seats;
+    }
+
+    static void run() {
+        BookMyShowApp app;
+        app.initialize();
+        app.userFlow();
+    }
+};
+
+// ============================================================
+// MAIN FUNCTION
 // ============================================================
 
 int main() {
-    // Create sample data
-    auto movie = make_shared<Movie>("Avengers");
-    auto user = make_shared<User>("user1", "John Doe");
-
-    // Create seats
-    vector<shared_ptr<Seat>> seats = {
-        make_shared<Seat>(1, SeatCategory::SILVER),
-        make_shared<Seat>(2, SeatCategory::GOLD),
-        make_shared<Seat>(3, SeatCategory::PLATINUM)
-    };
-
-    // Create screen and show
-    auto screen = make_shared<Screen>(1, seats);
-    auto show = make_shared<Show>(movie, screen, LocalDate::now(), LocalTime::of(18, 0));
-    screen->addShow(show);
-
-    // Create theatre and services
-    vector<shared_ptr<Screen>> screens = {screen};
-    auto theatre = make_shared<Theatre>("PVR", City::BANGALORE, screens);
-
-    TheatreService theatreService;
-    theatreService.addTheatre(theatre);
-
-    BookingService bookingService;
-
     try {
-        // Attempt booking
-        vector<int> requestedSeats = {1, 2};
-        auto booking = bookingService.book(user, show, requestedSeats);
-        cout << "Booking successful: " << booking->getBookingId().toString() << endl;
+        BookMyShowApp::run();
     } catch (const exception& e) {
-        cout << "Booking failed: " << e.what() << endl;
+        cerr << "Error: " << e.what() << endl;
+        return 1;
     }
-
     return 0;
 }
