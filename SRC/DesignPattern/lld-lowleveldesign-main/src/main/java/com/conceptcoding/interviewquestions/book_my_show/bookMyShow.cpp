@@ -224,7 +224,7 @@ public:
 };
 
 class Show {
-private:
+    private:
     shared_ptr<Movie> movie;
     LocalDate showDate;
     LocalTime startTime;
