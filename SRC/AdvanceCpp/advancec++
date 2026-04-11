@@ -1,0 +1,34 @@
+C++ 14
+
+1. make_unique
+2. aggregator member initialization 
+3. binary litral
+4. Function return type deduction
+5. Generic Lambda
+6. Relaxed constexpr functions 
+
+
+C++17
+
+1. CTAD
+2. Constexpr if statements
+3. initialization in if statement
+4. inline variable
+5. Mandatory copy elision in C++17
+6. optional
+7. string_view
+8. Structured binding declarations 
+9. any
+10. Nested Namespace
+11. static assert
+12. shared_ptr for array
+13. size
+14. Fold expressions
+
+C++20
+
+1. <=> spaceship operator
+2. Ranges & Views
+3. Concepts
+4. Modules
+5. Coroutines

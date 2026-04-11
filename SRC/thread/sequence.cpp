@@ -19,8 +19,10 @@ void func(int limit, int myTurn, int totalThreads)
                 { return turn == myTurn || counter > limit; });
 
         if (counter > limit)
+        {
+            cv.notify_all(); // wake all threads to exit
             break;
-
+        }
         cout << "Thread " << myTurn << " (id="
              << this_thread::get_id() << ") -> "
              << counter++ << endl;
