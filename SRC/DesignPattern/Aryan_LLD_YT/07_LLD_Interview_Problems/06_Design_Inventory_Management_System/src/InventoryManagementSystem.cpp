@@ -38,7 +38,7 @@ class ReplenishmentStrategy;
 class Product
 {
 protected:
-    string sku;
+    string sku;//stock keeping unit, unique identifier
     string name;
     double price;
     int quantity;
