@@ -1,0 +1,9 @@
+SQL
+
+practice to write queries
+
+NoSQL
+key value pair - redis, dynamoDB
+document based - couch, mongo DB
+wide column - cassandra, hBase
+Graph - Neo4J

@@ -1,0 +1,10 @@
+Concepts you should know
+
+1. Cache
+2. Consistent Hashing
+3. Distributed Cache
+4. Redis
+5. Kafka
+6. Message Queue
+7. CDC (change data capture)
+8. 

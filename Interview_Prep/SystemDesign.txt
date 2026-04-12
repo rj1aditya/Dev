@@ -1,0 +1,29 @@
+LLD
+
+1. Logger
+2. Thread Pool
+3. LRU/LFU
+4. Parking Lot
+5. Elevator
+6. BookMyshow
+7. ATM
+8. Rate limiter
+9. Inventory Management System
+10. Vending Machine
+11. Tic-Tac-Toe
+12. Snake-N-Ladder
+
+HLD
+
+1. BookMyshow
+2. YT/OTT System Design
+3. Live Streaming app
+4. URL Shortner
+5. Desing Social Media
+6. Whatsapp or Chat System
+7. News Feed
+8. Ride Sharing(OLA/Uber)
+9. Notification System
+10. System System (Goolge-lite)
+11. File Storate(Google Drive/Dropbox)
+12. Rate limier(HLD Version)

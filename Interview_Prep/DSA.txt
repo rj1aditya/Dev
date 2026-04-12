@@ -1,14 +1,14 @@
-Arrays
-Recursion
-DP (Dynamic Programming)
-Linked Lists
-Tree
-Graph
-Two pointers and sliding window
-Binary Search
-Sorting
-Stacks and Queue
-Greedy
-Bit Manipulation
-Maths
-TRIE
+1. Arrays
+2. Recursion
+3. DP (Dynamic Programming)
+4. Linked Lists
+5. Tree
+6. Graph
+7. Two pointers and sliding window
+8. Binary Search
+9. Sorting
+10. Stacks and Queue
+11. Greedy
+12. Bit Manipulation
+13. Maths
+14. TRIE

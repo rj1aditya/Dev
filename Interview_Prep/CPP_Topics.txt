@@ -1,18 +1,21 @@
-Type Casting
-Introduction to object relation
-Type Conversion and function Overloading
-Operator Overloading
-Templates
-Inheritance
-Polymorphism
-Virtual Functions
-Interface in C++
-Exception
-STL
-Network TCP/IP model
-Enum Class
-IPC
-Processes [process control block]
+CPP Basics
+
+1. Type Casting
+2. Introduction to object relation
+3. Type Conversion and function Overloading
+4. Operator Overloading
+5. Templates
+6. Inheritance
+7. Polymorphism
+8. Virtual Functions
+9. Interface in C++
+10. Exception
+11. STL
+12. Network TCP/IP model
+13. Enum Class
+14. IPC
+15. Processes [process control block]
+16. Take basic knowledge about static and Dynamic library, and its command to generate the .so file
 
 C++ 11
 1. Auto keyword

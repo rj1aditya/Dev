@@ -1,0 +1,33 @@
+SOLID Principle
+
+S
+O 
+L
+I
+D
+
+Design Patterns
+
+Creational DP
+1. Singleton
+2. Factory Method
+3. Abstract Factory Method
+4. Builder DP
+5. Prototype DP
+
+Structural DP
+1. Decorate DP
+2. Proxy DP
+3. Facade DP
+4. composite DP
+5. Adapter DP
+6. Bridge DP
+
+
+Behaviour DP
+1. State DP
+2. Command DP
+3. Strategy
+4. Obserber DP
+5. Iterator DP
+6. Chain of Responsiblity
