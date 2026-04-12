@@ -1,3 +1,19 @@
+Type Casting
+Introduction to object relation
+Type Conversion and function Overloading
+Operator Overloading
+Templates
+Inheritance
+Polymorphism
+Virtual Functions
+Interface in C++
+Exception
+STL
+Network TCP/IP model
+Enum Class
+IPC
+Processes [process control block]
+
 C++ 11
 1. Auto keyword
 2. decltype
