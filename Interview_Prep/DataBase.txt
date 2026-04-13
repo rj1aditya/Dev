@@ -7,3 +7,214 @@ key value pair - redis, dynamoDB
 document based - couch, mongo DB
 wide column - cassandra, hBase
 Graph - Neo4J
+
+
+
+no orders OR only orders with order_id < 100
+
+SELECT u.id
+FROM users u
+LEFT JOIN orders o ON u.id = o.user_id
+GROUP BY u.id
+HAVING COUNT(CASE WHEN o.order_id >= 100 THEN 1 END) = 0;
+
+
+select u.id from users u 
+inner join orders o 
+on u.id=o.user_id
+group by u.id having count(distinct o.order_id)=2;
+
+
+
+
+Perfect. This is exactly the right move.
+You hit CASE in Q2 and instead of skipping it, you want to understand it — that’s how real progress happens.
+
+Let’s break it down cleanly.
+
+⸻
+
+🧠 What is CASE in SQL?
+
+CASE = IF-ELSE logic inside SQL
+
+⸻
+
+🔹 Basic Syntax
+
+CASE 
+    WHEN condition THEN value
+    WHEN condition THEN value
+    ELSE value
+END
+
+
+⸻
+
+🔍 Simple Example
+
+SELECT name,
+CASE 
+    WHEN salary > 100000 THEN 'High'
+    ELSE 'Low'
+END as category
+FROM employees;
+
+👉 Like:
+
+if salary > 100000 → High  
+else → Low
+
+
+⸻
+
+🔥 Where CASE is used (important for you)
+
+1. Inside SELECT (for labeling)
+
+2. Inside COUNT / SUM (VERY IMPORTANT for Q2)
+
+⸻
+
+🧠 The Key Trick (This is what you saw in Q2)
+
+COUNT(CASE WHEN condition THEN 1 END)
+
+
+⸻
+
+🔍 What this does
+
+👉 For each row:
+	•	if condition TRUE → return 1
+	•	if FALSE → return NULL
+
+👉 And:
+
+COUNT() ignores NULL
+
+
+⸻
+
+⚡ So effectively:
+
+“Count only rows where condition is true”
+
+⸻
+
+🧪 Example
+
+orders
+
+order_id
+50
+120
+130
+
+
+⸻
+
+
+SELECT COUNT(CASE WHEN order_id > 100 THEN 1 END)
+FROM orders;
+
+
+⸻
+
+Evaluation:
+
+order_id	CASE result
+50	NULL
+120	1
+130	1
+
+👉 COUNT = 2
+
+⸻
+
+🔥 Why we used CASE in Q2
+
+Q2 required:
+
+“users who have NO orders ≥ 100”
+
+⸻
+
+So we wrote:
+
+COUNT(CASE WHEN o.order_id >= 100 THEN 1 END) = 0
+
+
+⸻
+
+🧠 Meaning:
+
+👉 “Count how many bad orders exist (≥100)”
+👉 If count = 0 → user is valid
+
+⸻
+
+⚡ Alternative thinking
+
+CASE helps you:
+	•	selectively count
+	•	selectively sum
+	•	selectively evaluate
+
+⸻
+
+👊 Key Patterns (must remember)
+
+✅ Count conditionally
+
+COUNT(CASE WHEN condition THEN 1 END)
+
+
+⸻
+
+✅ Sum conditionally
+
+SUM(CASE WHEN condition THEN amount ELSE 0 END)
+
+
+⸻
+
+🧠 Mental Model
+
+CASE = “convert condition into a value”
+
+⸻
+
+🔥 Mini Practice (Do this)
+
+👉 What will this return?
+
+SELECT 
+    COUNT(CASE WHEN order_id > 100 THEN 1 END),
+    COUNT(CASE WHEN order_id <= 100 THEN 1 END)
+FROM orders;
+
+
+⸻
+
+👊 Why this matters
+
+Without CASE:
+	•	You can’t solve Q2 cleanly
+	•	You struggle with analytics queries
+	•	You fail many interview SQL questions
+
+⸻
+
+🚀 Next Step
+
+Once you’re comfortable:
+
+👉 We’ll go back to Q2
+👉 And solve it using:
+	•	CASE
+	•	AND also alternative approach (without CASE)
+
+⸻
+
+Answer the mini practice first — let’s make CASE solid 😄

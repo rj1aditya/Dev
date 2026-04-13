@@ -1,0 +1,10 @@
+
+SRC to learn
+https://www.youtube.com/watch?v=Lu8lXXlstvM
+
+
+setup
+
+python
+nodejs for frontend ui, we will use instructor built UI, will download it from gitup
+https://github.com/navinreddy20/fastapi-demo/tree/products-with-ui/frontend
