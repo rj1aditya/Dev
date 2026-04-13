@@ -3,8 +3,15 @@ SRC to learn
 https://www.youtube.com/watch?v=Lu8lXXlstvM
 
 
-setup
+** setup
 
-python
-nodejs for frontend ui, we will use instructor built UI, will download it from gitup
+1. python
+
+2. nodejs for frontend ui, we will use instructor built UI, will download it from gitup
 https://github.com/navinreddy20/fastapi-demo/tree/products-with-ui/frontend
+
+steps to run the UI
+in the frontend directory, run
+>> npm install
+>> npm start this will run the website server
+
