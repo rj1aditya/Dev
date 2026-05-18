@@ -78,7 +78,7 @@ void func3()
 int main()
 {
     cout <<"Main Thread\n";
-    thread td1(func2);
+    thread td1(func1);
     thread td2(func2);
     thread td3(func3);
 

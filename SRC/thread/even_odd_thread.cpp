@@ -11,9 +11,6 @@ mutex m;
 
 void printNum(bool sig)
 {
-
-	//if (sig)
-	//{
 		while (icount < 100)
 		{
 			unique_lock<mutex> ulock(m);
@@ -23,19 +20,6 @@ void printNum(bool sig)
 			icount++;
 			c.notify_one();
 		}
-	//}
-	//else
-	// {
-	// 	while (icount <= 100)
-	// 	{
-	// 		unique_lock<mutex> ulock(m);
-	// 		c.wait(ulock, []()
-	// 			   { return !(icount % 2); });
-	// 		cout << this_thread::get_id() << " Even 	Thread	" << icount << endl;
-	// 		icount++;
-	// 		c.notify_one();
-	// 	}
-	// }
 }
 
 int main()
