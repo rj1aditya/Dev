@@ -46,6 +46,7 @@ class userBucket
 
 class rateLimiter
 {
+    //userId to userBucket mapping
     map<int, userBucket*> userBuckets;
     mutex mtx;
     int cap;
@@ -59,12 +60,12 @@ class rateLimiter
 
     bool allowRequest(int userId)
     {
-         lock_guard<mutex> lock(mtx);
-         if(userBuckets.find(userId) == userBuckets.end())
-         {
+        lock_guard<mutex> lock(mtx);
+        if(userBuckets.find(userId) == userBuckets.end())
+        {
             userBuckets[userId] = new userBucket(cap, tokenslimit);
-         }
-         return userBuckets[userId]->allowRequest();
+        }
+        return userBuckets[userId]->allowRequest();
      }
 };
 
