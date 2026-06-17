@@ -86,3 +86,48 @@ int main()
     td2.join();
     td3.join();
 }
+
+/*
+better using 1 function only
+
+what wrong in this code: #include<thread>
+#include<mutex>
+#include<iostream>
+#include<condition_variable>
+using namespace std;
+
+condition_variable cv;
+mutex mt;
+int counter = 1;
+
+void func(int id)
+{
+    while(counter <= 100)
+    {
+        unique_lock<mutex> ul(mt);
+        cv.wait(ul, [id](){
+            return counter % 3 == id || counter > 100;
+
+        });
+
+        if(counter > 100)
+        {
+            cv.notify_all();
+            break;
+        }
+        cout << this_thread::get_id()<<" "<<counter++<<endl;
+        cv.notify_all();        
+    }
+}
+
+int main()
+{
+    thread td1(func, 1);
+    thread td2(func, 2);
+    thread td3(func, 0);
+
+    td1.join();
+    td2.join();
+    td3.join();
+}
+*/
