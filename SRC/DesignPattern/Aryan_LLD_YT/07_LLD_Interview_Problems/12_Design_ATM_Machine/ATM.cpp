@@ -32,7 +32,8 @@ static const vector<CashType> kCashTypesDesc = {
     CashType::BILL_20,
     CashType::BILL_10,
     CashType::BILL_5,
-    CashType::BILL_1};
+    CashType::BILL_1
+};
 
 string cashTypeToString(CashType t)
 {
