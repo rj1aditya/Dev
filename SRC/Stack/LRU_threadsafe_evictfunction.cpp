@@ -1,11 +1,3 @@
-#include <iostream>
-#include <unordered_map>
-#include <thread>
-#include <mutex>
-#include <chrono>
-using namespace std;
-using namespace std::chrono;
-
 class NodeLazy
 {
 public:
@@ -20,36 +12,17 @@ public:
     }
 };
 
-class LRUCacheLazyTTL
+class DLL
 {
-    int cap, size;
-    NodeLazy *head, *tail;
-    unordered_map<int, NodeLazy *> mp;
-    mutex mtx;
-
-    // Background cleaner
-    thread cleaner;
-    atomic<bool> stopFlag{false};
-
 public:
-    LRUCacheLazyTTL(int capacity)
-        : cap(capacity), size(0), head(nullptr), tail(nullptr)
+    NodeLazy *head;
+    NodeLazy *tail;
+
+    DLL()
     {
-        // Start background cleaner thread
-        cleaner = thread(&LRUCacheLazyTTL::cleanerLoop, this);
+        head = tail = nullptr;
     }
 
-    ~LRUCacheLazyTTL()
-    {
-        stopFlag = true;
-        if (cleaner.joinable())
-            cleaner.join();
-
-        for (auto &[k, node] : mp)
-            delete node;
-    }
-
-private:
     void removeNode(NodeLazy *node)
     {
         if (node->prev)
@@ -67,25 +40,58 @@ private:
 
     void insertNode(NodeLazy *node)
     {
+        node->prev = node->next = nullptr;
+
         if (!tail)
-            head = tail = node;
-        else
         {
-            tail->next = node;
-            node->prev = tail;
-            tail = node;
+            head = tail = node;
+            return;
         }
+
+        tail->next = node;
+        node->prev = tail;
+        tail = node;
     }
+};
+
+class LRUCacheLazyTTL
+{
+    int cap, size;
+    DLL dll;
+    unordered_map<int, NodeLazy *> mp;
+
+    mutex mtx;
+    thread cleaner;
+    atomic<bool> stopFlag{false};
+
+public:
+    LRUCacheLazyTTL(int capacity)
+        : cap(capacity), size(0)
+    {
+        cleaner = thread(&LRUCacheLazyTTL::cleanerLoop, this);
+    }
+
+    ~LRUCacheLazyTTL()
+    {
+        stopFlag = true;
+
+        if (cleaner.joinable())
+            cleaner.join();
+
+        for (auto &[k, node] : mp)
+            delete node;
+    }
+
+private:
 
     void evict(NodeLazy *node)
     {
         mp.erase(node->key);
-        removeNode(node);
+        dll.removeNode(node);
         delete node;
         size--;
     }
 
-    // 🔁 Background cleaner loop
     void cleanerLoop()
     {
         while (!stopFlag)
@@ -96,24 +102,18 @@ private:
 
             auto now = steady_clock::now();
 
-            // Since head is LRU (oldest), check from head forward
-            while (head)
+            while (dll.head)
             {
-                if (now >= head->expireAt)
-                {
-                    NodeLazy *expired = head;
-                    evict(expired);
-                }
+                if (now >= dll.head->expireAt)
+                    evict(dll.head);
                 else
-                {
-                    // As soon as we find a non-expired node, stop
                     break;
-                }
             }
         }
     }
 
 public:
+
     int get(int key)
     {
         lock_guard<mutex> lock(mtx);
@@ -129,8 +129,9 @@ public:
             return -1;
         }
 
-        removeNode(node);
-        insertNode(node);
+        dll.removeNode(node);
+        dll.insertNode(node);
+
         return node->val;
     }
 
@@ -144,18 +145,22 @@ public:
         if (mp.count(key))
         {
             NodeLazy *node = mp[key];
+
             node->val = value;
             node->expireAt = steady_clock::now() + milliseconds(ttl_ms);
-            removeNode(node);
-            insertNode(node);
+
+            dll.removeNode(node);
+            dll.insertNode(node);
+
             return;
         }
 
         if (size == cap)
-            evict(head);
+            evict(dll.head);
 
         NodeLazy *node = new NodeLazy(key, value, ttl_ms);
-        insertNode(node);
+
+        dll.insertNode(node);
         mp[key] = node;
         size++;
     }
