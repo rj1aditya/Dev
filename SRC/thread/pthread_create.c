@@ -29,7 +29,6 @@ int main()
     pthread_t td1;
     printf("Main thread created start excecuting\n");
     pthread_create(&td1, NULL, &fun, NULL);
-    pthread_create(&td1, NULL, &fun, NULL);
     int iThreadRet;
     struct student *strThreadReturnVal;
     pthread_join(td1, (void*)&strThreadReturnVal);

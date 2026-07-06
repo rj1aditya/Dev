@@ -1,50 +1,56 @@
-#include<vector>
-#include<algorithm>
-#include <iostream>
-#include<string>
-using namespace std;
+struct Node {
+    int data;
+    Node *left;
+    Node *right;
 
-class Marker
-{
-    public:
-    int price;
-    string color;
+    Node(int val) {
+        data = val;
+        left = right = NULL;
+    }
 };
 
-
-class Invoice
+struct largeBST
 {
-
-    public:
-    Marker m1;
-    int quantity;
-    Invoice(Marker m,int q)
+    int size;
+    int lowest;
+    int highest;
+    largeBST(int mini, int maxi, int s)
     {
-        m1=m;
-        quantity=q;
+        lowest = mini;
+        highest = maxi;
+        size = s;
     }
 };
 
 
-class InvoiceDAO
-{
-    Invoice i1;
-    public:
-    InvoiceDAO(const Invoice &i):i1(i)
-    {
-    }
 
-    void saveToDB()
+class Solution {
+    
+    largeBST func(Node* root)
     {
-        cout<<"Invoice saved to DB with marker price: "<<i1.m1.price<<" and color: "<<i1.m1.color<<" and quantity: "<<i1.quantity<<endl;
+        if(!root)
+            return largeBST(INT_MAX, INT_MIN, 0);
+        
+        largeBST l = func(root->left);
+        largeBST r = func(root->right);
+        
+        if(root->data > l.highest && root->data < r.lowest)
+        {
+            int x = min(root->data, l.lowest);
+            int y = max(root->data, r.highest);
+            
+            return largeBST(x, y, 1 + l.size+r.size);
+        }
+        
+        return largeBST(INT_MIN, INT_MAX, max(l.size, r.size));
+        
+    }
+    
+  public:
+    /*You are required to complete this method */
+    // Return the size of the largest sub-tree which is also a BST
+    int largestBst(Node *root) {
+        // Your code here
+        return func(root).size;    
     }
 };
-
-int main()
-{
-    Marker m1{10,"red"};
-    Invoice i1(m1,5);
-    InvoiceDAO dao(i1);
-    dao.saveToDB();
-    return 0;   
-}
