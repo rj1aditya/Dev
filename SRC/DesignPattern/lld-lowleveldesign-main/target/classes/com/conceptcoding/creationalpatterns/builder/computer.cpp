@@ -114,7 +114,6 @@ public:
             if (storage.empty())
                 throw runtime_error("Storage is required!");
             // Direct new inside friend context to avoid private-ctor access issues with make_unique
-            cout << "Address of Builder class this point="<<this<<endl;
             return unique_ptr<Computer>(new Computer(*this));
         }
     };
@@ -157,7 +156,6 @@ private:
           camera(b.camera),
           biometric(b.biometric)
     {
-        cout << "Address of Computer class this point="<<this<<endl;
     }
 
 public:

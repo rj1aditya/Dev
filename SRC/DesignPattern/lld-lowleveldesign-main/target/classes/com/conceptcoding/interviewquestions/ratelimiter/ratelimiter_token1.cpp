@@ -3,73 +3,83 @@
 #include <thread>
 #include <mutex>
 #include <map>
-
+#include <algorithm>
 using namespace std;
 
-class userBucket
-{
-    int capcacity;
-    double tokenslimit;
-    int currenttokens;
-    std::chrono::steady_clock::time_point lastrefilltime;
+class userBucket {
+    int capacity;
+    double tokensPerSecond;
+    double currentTokens;
+    std::chrono::steady_clock::time_point lastRefillTime;
     mutex mtx;
 
 public:
-    userBucket(int capcacity, double tokenslimit)
-    {
-        this->capcacity = capcacity;
-        this->tokenslimit = tokenslimit;
-        this->currenttokens = capcacity;
-        this->lastrefilltime = std::chrono::steady_clock::now();
-    }
+    userBucket(int c, double tokensPerSecond)
+        : capacity(c),
+          tokensPerSecond(tokensPerSecond),
+          currentTokens(c),
+          lastRefillTime(std::chrono::steady_clock::now()) {}
 
-    void refill()
-    {
+    void refill() {
         auto now = std::chrono::steady_clock::now();
-        auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(now - lastrefilltime).count();
-        double tokensToAdd = (duration / 1000.0) * tokenslimit;
-        currenttokens = min(capcacity, currenttokens + static_cast<int>(tokensToAdd));
-        lastrefilltime = now;
+        auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(now - lastRefillTime).count();
+        double tokensToAdd = (duration / 1000.0) * tokensPerSecond;
+        currentTokens = std::min((double)capacity, currentTokens + tokensToAdd);
+        lastRefillTime = now;
     }
 
-    bool allowRequest()
-    {
+    bool allowRequest() {
         lock_guard<mutex> lock(mtx);
         refill();
-        if (currenttokens > 0)
-        {
-            currenttokens--;
+        if (currentTokens >= 1.0) {
+            currentTokens -= 1.0;
             return true;
         }
         return false;
     }
 };
 
-class RateLimiter
-{
-    map<int, userBucket> userBuckets;
+enum class Apps {
+    GET,
+    POST,
+    PUT,
+    DELETE
+};
+
+class rateLimiter {
+    map<int, map<Apps,userBucket*>> userBuckets;
     mutex mtx;
     int cap;
-    double tokenslimit;
+    double tokensPerSecond;
 
 public:
-    RateLimiter(int capcacity, double tokenslimit)
-    {
-        this->cap = capcacity;
-        this->tokenslimit = tokenslimit;
-    }
+    rateLimiter(int c, double tokensPerSecond)
+        : cap(c), tokensPerSecond(tokensPerSecond) {}
 
-    bool allowRequest(int userId)
-    {
+
+    bool allowRequest(int userId, Apps app) {
         lock_guard<mutex> lock(mtx);
-        if (userBuckets.find(userId) == userBuckets.end())
-        {
-            userBuckets[userId] = userBucket(cap, tokenslimit);
+        if (userBuckets[userId].find(app) == userBuckets[userId].end()) {
+           if (app == Apps::GET) {
+                userBuckets[userId][app] = new userBucket(100, 100);   // 100 req/sec
+            } else if (app == Apps::POST) {
+                userBuckets[userId][app] = new userBucket(20, 20);     // 20 req/sec
+            } else if (app == Apps::DELETE) {
+                userBuckets[userId][app] = new userBucket(5, 5);       // 5 req/sec
+            } else {
+                // Default bucket if unknown API type
+                userBuckets[userId][app] = new userBucket(10, 10);
+            }
         }
-        return userBuckets[userId].allowRequest();
+        return userBuckets[userId][app]->allowRequest();
     }
 };
 
-int main()
-{
+int main() {
+    rateLimiter rl(5, 1); // capacity = 5, refill rate = 1 token/sec
+    for (int i = 0; i < 10; i++) {
+        cout << rl.allowRequest(1, Apps::GET) << endl;
+        this_thread::sleep_for(chrono::milliseconds(500));
+    }
+    return 0;
 }

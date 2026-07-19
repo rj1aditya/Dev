@@ -1,93 +1,62 @@
 #include<iostream>
 #include<vector>
+#include<mutex>
 #include<string>
+#include<thread>
 using namespace std;
 
-class Employee{
-public:
-    string name;
-    int id;
-    Employee(int i, string n):id(i), name(n) {
-
-    }
-};
-
-class EmployeeDAO {
-public:
-    EmployeeDAO() = default;
-
-    virtual void getEmployeeInfo(int id) = 0;
-    virtual void createEmployee(Employee *e) = 0;
-    virtual void showAllEmployees() = 0;
-};
-
-class EmployeeDAOImpl: public EmployeeDAO {
-    vector<Employee*> employees;
-
-    EmployeeDAOImpl() = default;
-    void getEmployeeInfo(int id) {
-        cout <<"From database using following id="<<id<<" Will fetch the employee info and return to the client\n";
+class Singleton
+{
+    string value;
+    Singleton(string str)
+    {
+        value = str;
     }
 
-    void createEmployee(Employee *e) {
-        cout <<"Following user info will be saved into the database:\n";
-        cout <<"Employee Name="<<e->name <<" Employee Id="<<e->id<<endl;
-        employees.push_back(e);
-    }
-
-    void showAllEmployees() {
-        for (auto e : employees) {
-            cout <<"Employee Name="<<e->name <<" Employee Id="<<e->id<<endl;
-        }
-    }
-    friend class EmployeeDAOProxy;
-};
-
-class EmployeeDAOProxy: public EmployeeDAO {
-    EmployeeDAOImpl *realObj;
-    string userRole;
+    static mutex m;
+    static Singleton *singleton;
     public:
-    EmployeeDAOProxy(string role):userRole(role) {
-        realObj = new EmployeeDAOImpl();
-    };
 
-    void getEmployeeInfo(int id) {
-        if (userRole == "Admin" || userRole == "User")
-            realObj->getEmployeeInfo(id);
-        else {
-            cout <<"NO Access\n";
-        }
-    }
+    static Singleton* getInstance(string);
 
-    void createEmployee(Employee *e) {
-        if (userRole == "Admin") {
-            realObj->createEmployee(e);
-        }
-        else {
-            cout <<"No Access\n";
-        }
-    }
-
-    void showAllEmployees() {
-        if (userRole == "Admin" || userRole == "User")
-            realObj->showAllEmployees();
-        else {
-            cout <<"NO Access\n";
-        }
+    void getValue()
+    {
+        cout << value << endl;
     }
 };
 
-int main() {
-    Employee e1(1, "namen");
-    Employee e2(2, "adi");
-    Employee e3(3, "ad");
+mutex Singleton::m;
+Singleton *Singleton::singleton = nullptr;
 
-    EmployeeDAO* adminobj = new EmployeeDAOProxy("Admin");
-    EmployeeDAO* userobj = new EmployeeDAOProxy("User");
+Singleton* Singleton::getInstance(string v)
+{
+    m.lock();
+    if(singleton == nullptr)
+        singleton = new Singleton(v);
+    m.unlock();
+    return singleton;
+}
 
-    adminobj->createEmployee(&e1);
-    adminobj->createEmployee(&e2);
-    adminobj->createEmployee(&e3);
-    adminobj->showAllEmployees();
+
+void fun1()
+{
+    Singleton *inst = Singleton::getInstance("fin1");
+    inst->getValue();
+}
+
+void fun2()
+{
+    Singleton *inst = Singleton::getInstance("fin2");
+    inst->getValue();
+}
+
+int main()
+{
+    thread td1(fun1);
+    thread td2(fun2);
+
+    td1.join();
+    td2.join();
+
     return 0;
 }
