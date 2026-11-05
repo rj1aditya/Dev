@@ -34,7 +34,7 @@ class ProductCombo : public CartItem
 public:
     ProductCombo(const string &n) : comboName(n) {}
 
-    void addProduct(Product *p)
+    void addProduct(CartItem *p)
     {
         cart.push_back(p);
     }

@@ -1,49 +1,87 @@
-#include <iostream>
-#include <thread>
-#include <mutex>
-#include <condition_variable>
-
+#include<thread>
+#include<iostream>
+#include<queue>
+#include<condition_variable>
+#include<mutex>
+#include<vector>
+#include<functional>
+#include <algorithm>
 using namespace std;
 
-int counter = 1;
-int turn = 0; // start with thread 0
-mutex mtx;
-condition_variable cv;
-
-void func(int limit, int myTurn, int totalThreads)
+class ThreadPool
 {
-    while (true)
+    mutex m;
+    vector<thread> td;
+    int threadCount;
+    queue<function<void()>> q;
+    bool stop;
+    condition_variable cv;
+
+    public:
+    ThreadPool(int c):threadCount(c), stop(false)
     {
-        unique_lock<mutex> lock(mtx);
-        cv.wait(lock, [myTurn, limit]()
-                { return turn == myTurn || counter > limit; });
-
-        if (counter > limit)
+        for(int i = 0; i < threadCount; i++)
         {
-            cv.notify_all(); // wake all threads to exit
-            break;
+            td.emplace_back(thread(&ThreadPool::threadWorker, this));
         }
-        cout << "Thread " << myTurn << " (id="
-             << this_thread::get_id() << ") -> "
-             << counter++ << endl;
-
-        turn = (turn + 1) % totalThreads;
-        cv.notify_one(); // wake only the next waiting thread
     }
-}
+
+    void threadWorker()
+    {
+        while(true)
+        {
+            function<void()> fn;
+            unique_lock<mutex> ul(m);
+            cv.wait(ul, bind(&ThreadPool::check, this));
+            if(stop == true && q.empty())
+            {
+                return;
+            }
+
+            fn = std::move(q.front());
+            q.pop();
+            ul.unlock();
+            fn();
+        }
+    }
+
+    void addNewTask(function<void()> f)
+    {
+        m.lock();
+        q.push(std::move(f));
+        m.unlock();
+
+        cv.notify_one();
+    }
+
+    bool check()
+    {
+        return stop || !q.empty();
+    }
+
+    ~ThreadPool()
+    {
+        m.lock();
+        stop = true;
+        m.unlock();
+        cv.notify_all();
+        for(auto &t: td)
+            t.join();
+    }
+};
+
 
 int main()
 {
-    const int limit = 100;
-    const int totalThreads = 3;
-
-    thread td1(func, limit, 0, totalThreads);
-    thread td2(func, limit, 1, totalThreads);
-    thread td3(func, limit, 2, totalThreads);
-
-    td1.join();
-    td2.join();
-    td3.join();
+    ThreadPool obj(3);
+    for(int i = 0; i < 100; i++)
+    {
+        obj.addNewTask([i](){
+            cout << "Working thread id = "<<this_thread::get_id()<<" Task Counter = " << i <<endl;
+            this_thread::sleep_for(chrono::milliseconds(100));
+        });
+    }
 
     return 0;
+
 }
